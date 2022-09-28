@@ -1,0 +1,143 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:1862390446147814895",
+      "lastPropertyId": "4:6738249853814224260",
+      "name": "CustomColor",
+      "properties": [
+        {
+          "id": "1:9127416652579066474",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1057527897774156053",
+          "name": "colorIndex",
+          "type": 6,
+          "flags": 40,
+          "indexId": "1:3016745477818456274"
+        },
+        {
+          "id": "3:1669315436417196316",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "4:6738249853814224260",
+          "name": "colorCode",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:970313321321743892",
+      "lastPropertyId": "17:6761830351000798751",
+      "name": "Translation",
+      "properties": [
+        {
+          "id": "1:7951367514229275113",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4700193454538929208",
+          "name": "lv",
+          "type": 9
+        },
+        {
+          "id": "3:3024860369249755734",
+          "name": "lv_apz",
+          "type": 9
+        },
+        {
+          "id": "4:9202745428782112796",
+          "name": "lv_prio",
+          "type": 9
+        },
+        {
+          "id": "5:8614835646879242138",
+          "name": "la",
+          "type": 9
+        },
+        {
+          "id": "6:7223100214645804464",
+          "name": "en",
+          "type": 9
+        },
+        {
+          "id": "7:6830579313970010486",
+          "name": "de",
+          "type": 9
+        },
+        {
+          "id": "8:5283534759382134170",
+          "name": "de_apz",
+          "type": 9
+        },
+        {
+          "id": "9:3659317139538245922",
+          "name": "de_prio",
+          "type": 9
+        },
+        {
+          "id": "10:7979653284165777994",
+          "name": "ru",
+          "type": 9
+        },
+        {
+          "id": "11:2961136391087059541",
+          "name": "ru_apz",
+          "type": 9
+        },
+        {
+          "id": "12:3940277084859834864",
+          "name": "ru_prio",
+          "type": 9
+        },
+        {
+          "id": "13:4675460081918939381",
+          "name": "wiki_link",
+          "type": 9
+        },
+        {
+          "id": "14:5785639992704389240",
+          "name": "piezimes",
+          "type": 9
+        },
+        {
+          "id": "15:6930063614643977739",
+          "name": "def_tez",
+          "type": 9
+        },
+        {
+          "id": "16:316909615304505057",
+          "name": "link_tez",
+          "type": 9
+        },
+        {
+          "id": "17:6454148394787064133",
+          "name": "info",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:970313321321743892",
+  "lastIndexId": "1:3016745477818456274",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

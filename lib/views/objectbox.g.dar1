@@ -1,0 +1,284 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// Currently loading model from "JSON" which always encodes with double quotes
+// ignore_for_file: prefer_single_quotes
+// ignore_for_file: camel_case_types
+
+import 'dart:typed_data';
+
+import 'package:objectbox/objectbox.dart';
+import 'package:objectbox/flatbuffers/flat_buffers.dart' as fb;
+export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
+import 'package:objectbox/internal.dart'; // generated code can access "internal" functionality
+import 'models/models.dart';
+
+ModelDefinition getObjectBoxModel() {
+  final model = ModelInfo.fromMap({
+    "entities": [
+      {
+        "id": "1:1862390446147814895",
+        "lastPropertyId": "4:6738249853814224260",
+        "name": "CustomColor",
+        "properties": [
+          {
+            "id": "1:9127416652579066474",
+            "name": "id",
+            "type": 6,
+            "flags": 1,
+            "dartFieldType": "int?"
+          },
+          {
+            "id": "2:1057527897774156053",
+            "name": "colorIndex",
+            "type": 6,
+            "flags": 40,
+            "indexId": "1:3016745477818456274",
+            "dartFieldType": "int?"
+          },
+          {
+            "id": "3:1669315436417196316",
+            "name": "title",
+            "type": 9,
+            "dartFieldType": "String?"
+          },
+          {
+            "id": "4:6738249853814224260",
+            "name": "colorCode",
+            "type": 9,
+            "dartFieldType": "String?"
+          }
+        ],
+        "relations": [],
+        "backlinks": [],
+        "constructorParams": [
+          "colorIndex named",
+          "title named",
+          "colorCode named"
+        ],
+        "nullSafetyEnabled": false
+      },
+      {
+        "id": "2:970313321321743892",
+        "lastPropertyId": "17:1501011681893796082",
+        "name": "Translation",
+        "properties": [
+          {"id": "1:7951367514229275113", "name": "id", "type": 6, "flags": 1},
+          {"id": "2:4700193454538929208", "name": "lv", "type": 9},
+          {"id": "3:3024860369249755734", "name": "lv_apz", "type": 9},
+          {"id": "4:9202745428782112796", "name": "lv_prio", "type": 9},
+          {"id": "5:8614835646879242138", "name": "la", "type": 9},
+          {"id": "6:7223100214645804464", "name": "en", "type": 9},
+          {"id": "7:6830579313970010486", "name": "de", "type": 9},
+          {"id": "8:5283534759382134170", "name": "de_apz", "type": 9},
+          {"id": "9:3659317139538245922", "name": "de_prio", "type": 9},
+          {"id": "10:7979653284165777994", "name": "ru", "type": 9},
+          {"id": "11:2961136391087059541", "name": "ru_apz", "type": 9},
+          {"id": "12:3940277084859834864", "name": "ru_prio", "type": 9},
+          {"id": "13:4675460081918939381", "name": "wiki_link", "type": 9},
+          {"id": "14:5785639992704389240", "name": "piezimes", "type": 9},
+          {"id": "15:6930063614643977739", "name": "def_tez", "type": 9},
+          {"id": "16:316909615304505057", "name": "link_tez", "type": 9},
+          {"id": "17:1501011681893796082", "name": "info", "type": 9}
+        ],
+        "relations": [],
+        "backlinks": [],
+        "constructorParams": [
+          "lv named",
+          "lv_apz named",
+          "lv_prio named",
+          "la named",
+          "en named",
+          "de named",
+          "de_apz named",
+          "de_prio named",
+          "ru named",
+          "ru_apz named",
+          "ru_prio named",
+          "wiki_link named",
+          "piezimes named",
+          "def_tez named",
+          "link_tez named",
+          "info named"
+        ],
+        "nullSafetyEnabled": false
+      }
+    ],
+    "lastEntityId": "2:970313321321743892",
+    "lastIndexId": "1:3016745477818456274",
+    "lastRelationId": "0:0",
+    "lastSequenceId": "0:0",
+    "modelVersion": 5
+  }, check: false);
+
+  final bindings = <Type, EntityDefinition>{};
+  bindings[CustomColor] = EntityDefinition<CustomColor>(
+      model: model.getEntityByUid(1862390446147814895),
+      toOneRelations: (CustomColor object) => [],
+      toManyRelations: (CustomColor object) => {},
+      getId: (CustomColor object) => object.id,
+      setId: (CustomColor object, int id) {
+        object.id = id;
+      },
+      objectToFB: (CustomColor object, fb.Builder fbb) {
+        final offsettitle =
+            object.title == null ? null : fbb.writeString(object.title);
+        final offsetcolorCode =
+            object.colorCode == null ? null : fbb.writeString(object.colorCode);
+        fbb.startTable(5);
+        fbb.addInt64(0, object.id ?? 0);
+        fbb.addInt64(1, object.colorIndex);
+        fbb.addOffset(2, offsettitle);
+        fbb.addOffset(3, offsetcolorCode);
+        fbb.finish(fbb.endTable());
+        return object.id ?? 0;
+      },
+      objectFromFB: (Store store, Uint8List fbData) {
+        final buffer = fb.BufferContext.fromBytes(fbData);
+        final rootOffset = buffer.derefObject(0);
+
+        final object = CustomColor(
+            colorIndex:
+                fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 6),
+            title: fb.StringReader().vTableGetNullable(buffer, rootOffset, 8),
+            colorCode:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 10))
+          ..id = fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
+
+        return object;
+      });
+  bindings[Translation] = EntityDefinition<Translation>(
+      model: model.getEntityByUid(970313321321743892),
+      toOneRelations: (Translation object) => [],
+      toManyRelations: (Translation object) => {},
+      getId: (Translation object) => object.id,
+      setId: (Translation object, int id) {
+        object.id = id;
+      },
+      objectToFB: (Translation object, fb.Builder fbb) {
+        final offsetlv = object.lv == null ? null : fbb.writeString(object.lv);
+        final offsetlv_apz =
+            object.lv_apz == null ? null : fbb.writeString(object.lv_apz);
+        final offsetlv_prio =
+            object.lv_prio == null ? null : fbb.writeString(object.lv_prio);
+        final offsetla = object.la == null ? null : fbb.writeString(object.la);
+        final offseten = object.en == null ? null : fbb.writeString(object.en);
+        final offsetde = object.de == null ? null : fbb.writeString(object.de);
+        final offsetde_apz =
+            object.de_apz == null ? null : fbb.writeString(object.de_apz);
+        final offsetde_prio =
+            object.de_prio == null ? null : fbb.writeString(object.de_prio);
+        final offsetru = object.ru == null ? null : fbb.writeString(object.ru);
+        final offsetru_apz =
+            object.ru_apz == null ? null : fbb.writeString(object.ru_apz);
+        final offsetru_prio =
+            object.ru_prio == null ? null : fbb.writeString(object.ru_prio);
+        final offsetwiki_link =
+            object.wiki_link == null ? null : fbb.writeString(object.wiki_link);
+        final offsetpiezimes =
+            object.piezimes == null ? null : fbb.writeString(object.piezimes);
+        final offsetdef_tez =
+            object.def_tez == null ? null : fbb.writeString(object.def_tez);
+        final offsetlink_tez =
+            object.link_tez == null ? null : fbb.writeString(object.link_tez);
+        final offsetinfo =
+            object.info == null ? null : fbb.writeString(object.info);
+        fbb.startTable(18);
+        fbb.addInt64(0, object.id ?? 0);
+        fbb.addOffset(1, offsetlv);
+        fbb.addOffset(2, offsetlv_apz);
+        fbb.addOffset(3, offsetlv_prio);
+        fbb.addOffset(4, offsetla);
+        fbb.addOffset(5, offseten);
+        fbb.addOffset(6, offsetde);
+        fbb.addOffset(7, offsetde_apz);
+        fbb.addOffset(8, offsetde_prio);
+        fbb.addOffset(9, offsetru);
+        fbb.addOffset(10, offsetru_apz);
+        fbb.addOffset(11, offsetru_prio);
+        fbb.addOffset(12, offsetwiki_link);
+        fbb.addOffset(13, offsetpiezimes);
+        fbb.addOffset(14, offsetdef_tez);
+        fbb.addOffset(15, offsetlink_tez);
+        fbb.addOffset(16, offsetinfo);
+        fbb.finish(fbb.endTable());
+        return object.id ?? 0;
+      },
+      objectFromFB: (Store store, Uint8List fbData) {
+        final buffer = fb.BufferContext.fromBytes(fbData);
+        final rootOffset = buffer.derefObject(0);
+
+        final object = Translation(
+            lv: fb.StringReader().vTableGetNullable(buffer, rootOffset, 6),
+            lv_apz: fb.StringReader().vTableGetNullable(buffer, rootOffset, 8),
+            lv_prio:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 10),
+            la: fb.StringReader().vTableGetNullable(buffer, rootOffset, 12),
+            en: fb.StringReader().vTableGetNullable(buffer, rootOffset, 14),
+            de: fb.StringReader().vTableGetNullable(buffer, rootOffset, 16),
+            de_apz: fb.StringReader().vTableGetNullable(buffer, rootOffset, 18),
+            de_prio:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 20),
+            ru: fb.StringReader().vTableGetNullable(buffer, rootOffset, 22),
+            ru_apz: fb.StringReader().vTableGetNullable(buffer, rootOffset, 24),
+            ru_prio:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 26),
+            wiki_link:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 28),
+            piezimes:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 30),
+            def_tez:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 32),
+            link_tez:
+                fb.StringReader().vTableGetNullable(buffer, rootOffset, 34),
+            info: fb.StringReader().vTableGetNullable(buffer, rootOffset, 36))
+          ..id = fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
+
+        return object;
+      });
+
+  return ModelDefinition(model, bindings);
+}
+
+class CustomColor_ {
+  static final id =
+      QueryIntegerProperty(entityId: 1, propertyId: 1, obxType: 6);
+  static final colorIndex =
+      QueryIntegerProperty(entityId: 1, propertyId: 2, obxType: 6);
+  static final title =
+      QueryStringProperty(entityId: 1, propertyId: 3, obxType: 9);
+  static final colorCode =
+      QueryStringProperty(entityId: 1, propertyId: 4, obxType: 9);
+}
+
+class Translation_ {
+  static final id =
+      QueryIntegerProperty(entityId: 2, propertyId: 1, obxType: 6);
+  static final lv = QueryStringProperty(entityId: 2, propertyId: 2, obxType: 9);
+  static final lv_apz =
+      QueryStringProperty(entityId: 2, propertyId: 3, obxType: 9);
+  static final lv_prio =
+      QueryStringProperty(entityId: 2, propertyId: 4, obxType: 9);
+  static final la = QueryStringProperty(entityId: 2, propertyId: 5, obxType: 9);
+  static final en = QueryStringProperty(entityId: 2, propertyId: 6, obxType: 9);
+  static final de = QueryStringProperty(entityId: 2, propertyId: 7, obxType: 9);
+  static final de_apz =
+      QueryStringProperty(entityId: 2, propertyId: 8, obxType: 9);
+  static final de_prio =
+      QueryStringProperty(entityId: 2, propertyId: 9, obxType: 9);
+  static final ru =
+      QueryStringProperty(entityId: 2, propertyId: 10, obxType: 9);
+  static final ru_apz =
+      QueryStringProperty(entityId: 2, propertyId: 11, obxType: 9);
+  static final ru_prio =
+      QueryStringProperty(entityId: 2, propertyId: 12, obxType: 9);
+  static final wiki_link =
+      QueryStringProperty(entityId: 2, propertyId: 13, obxType: 9);
+  static final piezimes =
+      QueryStringProperty(entityId: 2, propertyId: 14, obxType: 9);
+  static final def_tez =
+      QueryStringProperty(entityId: 2, propertyId: 15, obxType: 9);
+  static final link_tez =
+      QueryStringProperty(entityId: 2, propertyId: 16, obxType: 9);
+  static final info =
+      QueryStringProperty(entityId: 2, propertyId: 17, obxType: 9);
+}

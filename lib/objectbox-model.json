@@ -1,0 +1,407 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2683551888199629224",
+      "lastPropertyId": "4:3758972551491821640",
+      "name": "CustomColor",
+      "properties": [
+        {
+          "id": "1:4988748134080012385",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4348513082327476792",
+          "name": "colorIndex",
+          "type": 6,
+          "flags": 40,
+          "indexId": "1:5238349987439200121"
+        },
+        {
+          "id": "3:8124728802137237650",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "4:3758972551491821640",
+          "name": "colorCode",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3460610557230953992",
+      "lastPropertyId": "2:5491541817678450843",
+      "name": "FlowersColors",
+      "properties": [
+        {
+          "id": "1:777685363715707197",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5491541817678450843",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:2452940517196892006",
+      "lastPropertyId": "2:8213055079628100820",
+      "name": "FruitsColors",
+      "properties": [
+        {
+          "id": "1:90234074131202362",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8213055079628100820",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:8722602640440301466",
+      "lastPropertyId": "2:3997485097439033332",
+      "name": "LeafsColors",
+      "properties": [
+        {
+          "id": "1:6022467500707801981",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3997485097439033332",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:5425647106777311919",
+      "lastPropertyId": "2:7959414578199276658",
+      "name": "NeedlesColors",
+      "properties": [
+        {
+          "id": "1:6227773956193274423",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7959414578199276658",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:4567377864617181657",
+      "lastPropertyId": "2:8245701959917774120",
+      "name": "PlantType",
+      "properties": [
+        {
+          "id": "1:7944321856025520049",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8245701959917774120",
+          "name": "title",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:6072738139166872678",
+      "lastPropertyId": "22:1161895447632494151",
+      "name": "Translation",
+      "properties": [
+        {
+          "id": "1:7039870096612976818",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:973039466204566340",
+          "name": "wordsGroupId",
+          "type": 6
+        },
+        {
+          "id": "3:4518353453614983906",
+          "name": "lv",
+          "type": 9
+        },
+        {
+          "id": "4:7596387517274526657",
+          "name": "lv_apz",
+          "type": 9
+        },
+        {
+          "id": "5:1206052273046985637",
+          "name": "lv_prio",
+          "type": 6
+        },
+        {
+          "id": "6:1705626030216646035",
+          "name": "la",
+          "type": 9
+        },
+        {
+          "id": "7:1062467891763622841",
+          "name": "en",
+          "type": 9
+        },
+        {
+          "id": "8:2063455700139359659",
+          "name": "de",
+          "type": 9
+        },
+        {
+          "id": "9:6143344552753737577",
+          "name": "de_apz",
+          "type": 9
+        },
+        {
+          "id": "10:2915491340508009880",
+          "name": "de_prio",
+          "type": 6
+        },
+        {
+          "id": "11:4142597688827965238",
+          "name": "ru",
+          "type": 9
+        },
+        {
+          "id": "12:1822118884771747681",
+          "name": "ru_apz",
+          "type": 9
+        },
+        {
+          "id": "13:1972496382822722128",
+          "name": "ru_prio",
+          "type": 6
+        },
+        {
+          "id": "14:2441992420161225287",
+          "name": "piezimes",
+          "type": 9
+        },
+        {
+          "id": "15:3772523888664479617",
+          "name": "attela_links",
+          "type": 9
+        },
+        {
+          "id": "16:2275402150684209862",
+          "name": "link_tez",
+          "type": 9
+        },
+        {
+          "id": "17:3961453271220193221",
+          "name": "showLA",
+          "type": 1
+        },
+        {
+          "id": "18:7290635148527207932",
+          "name": "showLV",
+          "type": 1
+        },
+        {
+          "id": "19:4018071999564793861",
+          "name": "showEN",
+          "type": 1
+        },
+        {
+          "id": "20:5913665159279911048",
+          "name": "showDE",
+          "type": 1
+        },
+        {
+          "id": "21:6989318315673591662",
+          "name": "showRU",
+          "type": 1
+        },
+        {
+          "id": "22:1161895447632494151",
+          "name": "plantTypeID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:8461370933261220478",
+      "lastPropertyId": "3:1618742280192239237",
+      "name": "TranslationWithFlowersColor",
+      "properties": [
+        {
+          "id": "1:270379255819265477",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8612615921146490109",
+          "name": "translationID",
+          "type": 6
+        },
+        {
+          "id": "3:1618742280192239237",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "9:3494228399476103548",
+      "lastPropertyId": "3:4472523163774200293",
+      "name": "TranslationWithFruitsColor",
+      "properties": [
+        {
+          "id": "1:9018605033386080364",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1900596157149927517",
+          "name": "translationID",
+          "type": 6
+        },
+        {
+          "id": "3:4472523163774200293",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "10:7881186908689296347",
+      "lastPropertyId": "3:2053992761036194924",
+      "name": "TranslationWithLeafsColor",
+      "properties": [
+        {
+          "id": "1:3029797189178570200",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5342126198814580688",
+          "name": "translationID",
+          "type": 6
+        },
+        {
+          "id": "3:2053992761036194924",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "11:1976375422800812994",
+      "lastPropertyId": "3:6168541787284294386",
+      "name": "TranslationWithMonths",
+      "properties": [
+        {
+          "id": "1:5060805495366747072",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2477154197585044567",
+          "name": "translationID",
+          "type": 6
+        },
+        {
+          "id": "3:6168541787284294386",
+          "name": "monthNumber",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "12:4171471033305966773",
+      "lastPropertyId": "3:8897610358364840964",
+      "name": "TranslationWithNeedlesColor",
+      "properties": [
+        {
+          "id": "1:7479595031114092952",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5227688890823141455",
+          "name": "translationID",
+          "type": 6
+        },
+        {
+          "id": "3:8897610358364840964",
+          "name": "colorID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "13:2924189543417418257",
+      "lastPropertyId": "3:1013897354168842013",
+      "name": "TranslationWithPlantType",
+      "properties": [
+        {
+          "id": "1:69580186509087162",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7333794919803896549",
+          "name": "translationID",
+          "type": 6
+        },
+        {
+          "id": "3:1013897354168842013",
+          "name": "plantTypeID",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "13:2924189543417418257",
+  "lastIndexId": "1:5238349987439200121",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
