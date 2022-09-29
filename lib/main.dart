@@ -26,37 +26,33 @@ import 'db/globals.dart' as globals;
 
 void main() {
   runApp(MyApp());
-  // TranslationWithPlantTypesInserts translationWithPlantTypesInserts =
-  //     TranslationWithPlantTypesInserts();
-  // TranslationsColorsInserts translationsColorsInserts =
-  //     TranslationsColorsInserts();
-  // ColorsInserts colorsInserts = ColorsInserts();
-  TranslationInserts translationsInserts = TranslationInserts();
-  // colorsInserts.addInserts();
-  // translationsColorsInserts.addAllInserts();
-  // translationsInserts.addPlantTypes();
-  translationsInserts.cleanAllInserts();
-  translationsInserts.addInserts();
-  // translationWithPlantTypesInserts.addInserts();
-  pathProvider.getApplicationDocumentsDirectory().then((Directory dir) {
-    var _store = Store(getObjectBoxModel(), directory: dir.path + '/objectbox');
-    var transBox = _store.box<Translation>();
-    print("transBox on top");
-  });
 
-  // colorsInserts.cleanAllInserts();
-  // colorsInserts.addInserts();
-
-  // translationsInserts.clearAllTranslationsWithPlantTypes();
-  // translationsInserts.addPlantTypes();
+  // TranslationInserts translationsInserts = TranslationInserts();
+  // // colorsInserts.addInserts();
+  // // translationsColorsInserts.addAllInserts();
+  // // translationsInserts.addPlantTypes();
   // translationsInserts.cleanAllInserts();
   // translationsInserts.addInserts();
-  // TranslationWithPlantTypesInserts translationWithPlantTypesInserts =
-  //     TranslationWithPlantTypesInserts();
+  // // translationWithPlantTypesInserts.addInserts();
+  // pathProvider.getApplicationDocumentsDirectory().then((Directory dir) {
+  //   var _store = Store(getObjectBoxModel(), directory: dir.path + '/objectbox');
+  //   var transBox = _store.box<Translation>();
+  //   print("transBox on top");
+  // });
 
+  // // colorsInserts.cleanAllInserts();
+  // // colorsInserts.addInserts();
+
+  // // translationsInserts.clearAllTranslationsWithPlantTypes();
+  // // translationsInserts.addPlantTypes();
   // // translationsInserts.cleanAllInserts();
-  // translationsInserts.addInserts();
-  // globals.addWords();
+  // // translationsInserts.addInserts();
+  // // TranslationWithPlantTypesInserts translationWithPlantTypesInserts =
+  // //     TranslationWithPlantTypesInserts();
+
+  // // // translationsInserts.cleanAllInserts();
+  // // translationsInserts.addInserts();
+  // // globals.addWords();
 }
 
 class MyApp extends StatefulWidget {
