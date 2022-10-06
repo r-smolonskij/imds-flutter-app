@@ -65280,7 +65280,7 @@ function isEmpty(value) {
     return answer;
 }
 function getValueToAdd(value, propertyName) {
-    let integerProperties = ["id", "lv_prio", "de_prio", "ru_prio", "foliage_height", "plant_height", "plant_width"];
+    let integerProperties = ["id", "translationGroup", "lv_prio", "de_prio", "ru_prio", "foliage_height", "plant_height", "plant_width"];
     let finalValue;
     if (integerProperties.includes(propertyName)) {
         finalValue = value;
@@ -65299,18 +65299,22 @@ function getValueToAdd(value, propertyName) {
 
     return finalValue;
 }
-let insertAllText = "INSERT INTO translations (id,lv,lv_apz,lv_prio,la,en,de,de_apz,de_prio,ru,ru_apz,ru_prio,image_url,notes,tezaurs_url,tezaurs_definition,foliage_height, plant_height, plant_width, plant_group, plant_subgroup) values "
+let insertAllText = "INSERT INTO translations (id,translation_group,lv,lv_apz,lv_prio,la,en,de,de_apz,de_prio,ru,ru_apz,ru_prio,image_url,notes,tezaurs_url,tezaurs_definition,foliage_height, plant_height, plant_width, plant_group, plant_subgroup) values "
+let translationsList = [];
 data.forEach((item, transIndex) => {
     if (item["LV"]) {
         let text = "(";
-        let propertiesToIterate = ["id", "LV", "lv_apz", "LV prio", "LA", "EN", "DE", "de_apz", "de_prio", "RU", "ru_apz", "RU prio", "Saite uz attēlu", "Piezīmes", 'Saite uz tezaurs.lv', 'Definīcija no tezaurs.lv', 'Lapojuma augstums (m)', 'Auga augstums (m): viss augs', 'Auga platums (m) (lapu un skuju kokaugiem)', "Grupējums (dzīvesforma vai cita grupa)", "Apakšgrupa"];
+        let propertiesToIterate = ["id", "translationGroup", "LV", "lv_apz", "LV prio", "LA", "EN", "DE", "de_apz", "de_prio", "RU", "ru_apz", "RU prio", "Saite uz attēlu", "Piezīmes", 'Saite uz tezaurs.lv', 'Definīcija no tezaurs.lv', 'Lapojuma augstums (m)', 'Auga augstums (m): viss augs', 'Auga platums (m) (lapu un skuju kokaugiem)', "Grupējums (dzīvesforma vai cita grupa)", "Apakšgrupa"];
         item["id"] = transIndex;
+        let foundTranslation = translationsList.find(translation => translation["LA"] && translation["LA"].toLowerCase().trim() == item["LA"].toLowerCase().trim());
+        item["translationGroup"] = foundTranslation ? foundTranslation["translationGroup"] : item["id"];
         propertiesToIterate.forEach((property, index) => {
             let valueToAdd = !isEmpty(item[property]) ? getValueToAdd(item[property], property) : 'null';
             let textToAdd = index == 0 ? `${valueToAdd}` : `,${valueToAdd}`;
             text += textToAdd;
         });
         text += `)${transIndex + 1 == data.length ? ';' : ','}`;
+        translationsList.push(item);
         dbInsertsList.push(text);
     }
 });

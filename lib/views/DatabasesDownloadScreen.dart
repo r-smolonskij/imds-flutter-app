@@ -5,10 +5,6 @@ import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
 import 'package:flutterTestApp/models/models.dart';
-
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:spell_checker/spell_checker.dart';
 import 'package:path_provider/path_provider.dart';
 
 // import '../objectbox.g.dart';

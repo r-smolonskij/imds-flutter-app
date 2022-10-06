@@ -3,6 +3,7 @@ import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/constants.dart';
 import 'package:flutterTestApp/views/AboutAppScreen.dart';
 import 'package:flutterTestApp/views/DatabasesDownloadScreen.dart';
+import 'package:flutterTestApp/views/Games/GamesListScreen.dart';
 
 import 'package:flutterTestApp/views/InteractivePhotosListScreen.dart';
 import 'package:flutterTestApp/views/PublicationsScreen.dart';
@@ -40,6 +41,11 @@ class DefaultDrawer extends StatelessWidget {
             title: "Meklesana pec filtriem",
             iconName: Icons.search,
             navigateTo: SearchByFiltersScreen(),
+          ),
+          CustomListTile(
+            title: "Izglītojošās spēles",
+            iconName: Icons.videogame_asset,
+            navigateTo: GamesList(),
           ),
           CustomListTile(
             title:

@@ -7,14 +7,15 @@ class SearchFieldButton extends StatefulWidget {
       this.title,
       this.dialogFunction,
       this.resultsList,
-      this.colorsList,
+      this.colorsIdsList,
       this.monthsText,
-      this.selectedType})
+      this.selectedTypeId})
       : super(key: key);
   final String title, monthsText;
   final Function dialogFunction;
-  final List resultsList, colorsList;
-  final dynamic selectedType;
+  final List resultsList;
+  final List<int> colorsIdsList;
+  final int selectedTypeId;
   @override
   _SearchFieldButtonState createState() => _SearchFieldButtonState();
 }
@@ -26,13 +27,17 @@ class _SearchFieldButtonState extends State<SearchFieldButton> {
 
   @override
   void initState() {
-    print(widget.selectedType);
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var selectedType = widget.selectedTypeId != null
+        ? plantsGroups.firstWhere(
+            (element) => element.id == widget.selectedTypeId,
+            orElse: () => null)
+        : null;
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: GestureDetector(
@@ -61,9 +66,9 @@ class _SearchFieldButtonState extends State<SearchFieldButton> {
                             color: Colors.white),
                       ),
                     ),
-                    widget.selectedType != null
+                    selectedType != null
                         ? Text(
-                            widget.selectedType[1].toString(),
+                            selectedType.text,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
@@ -78,10 +83,13 @@ class _SearchFieldButtonState extends State<SearchFieldButton> {
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           )
                         : SizedBox(),
-                    widget.colorsList != null
+                    widget.colorsIdsList != null
                         ? Wrap(
-                            children: widget.colorsList.map((e) {
-                              if (e[3]) {
+                            children: widget.colorsIdsList.map((colorId) {
+                              var color = plantColors.firstWhere(
+                                  (color) => color["id"] == colorId,
+                                  orElse: () => null);
+                              if (color != null) {
                                 return Padding(
                                   padding: const EdgeInsets.only(
                                       right: 5, bottom: 2),
@@ -90,15 +98,13 @@ class _SearchFieldButtonState extends State<SearchFieldButton> {
                                     width: 14,
                                     padding: EdgeInsets.all(3),
                                     decoration: BoxDecoration(
-                                      color: hexToColor("#" + e[2]),
+                                      color: hexToColor("#" + color["hexCode"]),
                                       border: Border.all(
                                           width: 1, color: Colors.black),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                   ),
                                 );
-                              } else {
-                                return SizedBox();
                               }
                             }).toList(),
                           )

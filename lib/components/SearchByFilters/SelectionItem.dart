@@ -1,48 +1,37 @@
 import 'package:flutter/material.dart';
 
-
 class SelectionItem extends StatefulWidget {
-  const SelectionItem({
-    Key key,
-    this.id,
-    this.title,
-    this.isSelected,
-    this.imagePath,
-    this.changeSelectionState,
-    this.stateSetter,
-  }) : super(key: key);
+  const SelectionItem(
+      {Key key,
+      this.id,
+      this.title,
+      this.isSelected,
+      this.imagePath,
+      this.onPress})
+      : super(key: key);
   final String title, imagePath;
-  final int isSelected, id;
-  final Function changeSelectionState;
-  final VoidCallback stateSetter;
+  final int id;
+  final bool isSelected;
+  final Function onPress;
 
   @override
   _SelectionItemState createState() => _SelectionItemState();
 }
 
 class _SelectionItemState extends State<SelectionItem> {
-  var localSel;
-
-  void changeState(int state) {
-    setState(() {
-      localSel = state;
-    });
-  }
-
   @override
   void initState() {
-    changeState(widget.isSelected);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-       onTap: () {
-              widget.stateSetter();
-              Navigator.of(context).pop();
-            },
-        child: Padding(
+      onTap: () {
+        widget.onPress();
+        Navigator.of(context).pop();
+      },
+      child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +49,7 @@ class _SelectionItemState extends State<SelectionItem> {
                         border: Border.all(width: 1, color: Colors.white),
                       ),
                       child: Image.asset(
-                        "assets/icons/piktogrammas/${widget.imagePath}",
+                        "assets/images/piktogrammas/${widget.imagePath}",
                         height: 25,
                         width: 25,
                       ),
@@ -69,7 +58,8 @@ class _SelectionItemState extends State<SelectionItem> {
                   Expanded(
                     child: Text(
                       widget.title != null ? widget.title : "",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -77,7 +67,7 @@ class _SelectionItemState extends State<SelectionItem> {
               ),
             ),
             Icon(
-              widget.isSelected == widget.id
+              widget.isSelected
                   ? Icons.check_circle_outline_outlined
                   : Icons.radio_button_off,
               size: 30,

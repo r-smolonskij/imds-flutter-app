@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
-import 'package:flutterTestApp/models/models.dart';
 import 'package:flutterTestApp/objectbox.g.dart';
+import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/views/SingleTranslationScreen.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -69,66 +69,66 @@ class InteractivePhotoScreen extends StatelessWidget {
                       : SizedBox(
                           height: 0,
                         ),
-                  infoButton != null
-                      ? Positioned(
-                          bottom: 20,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: () {
-                              var _store, transBox, translation;
-                              getApplicationDocumentsDirectory()
-                                  .then((Directory dir) {
-                                _store = Store(getObjectBoxModel(),
-                                    directory: dir.path + '/objectbox');
-                                transBox = _store.box<Translation>();
-                                var query = transBox
-                                    .query(
-                                        Translation_.id.equals(infoButton[2]))
-                                    .build();
-                                translation = query.find();
-                              });
-                              showDialog<void>(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return DescriptionAlert(
-                                    translation: translation[0],
-                                  );
-                                },
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.black, width: 2),
-                                  borderRadius: BorderRadius.circular(10)),
-                              // height: size.width * 0.2,
-                              // width: infoButton.length == 4
-                              //     ? infoButton[3]
-                              //     : size.width * 0.25,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.translate,
-                                      size: size.width * 0.08,
-                                    ),
-                                  ),
-                                  // Text(
-                                  //   "Translations",
-                                  //   textAlign: TextAlign.center,
-                                  //   style:
-                                  //       TextStyle(fontSize: size.width * 0.04),
-                                  // )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      : SizedBox(height: 0),
+                  // infoButton != null
+                  //     ? Positioned(
+                  //         bottom: 20,
+                  //         right: 0,
+                  //         child: GestureDetector(
+                  //           onTap: () {
+                  //             var _store, transBox, translation;
+                  //             getApplicationDocumentsDirectory()
+                  //                 .then((Directory dir) {
+                  //               _store = Store(getObjectBoxModel(),
+                  //                   directory: dir.path + '/objectbox');
+                  //               transBox = _store.box<Translation>();
+                  //               var query = transBox
+                  //                   .query(
+                  //                       Translation_.id.equals(infoButton[2]))
+                  //                   .build();
+                  //               translation = query.find();
+                  //             });
+                  //             showDialog<void>(
+                  //               context: context,
+                  //               barrierDismissible:
+                  //                   false, // user must tap button!
+                  //               builder: (BuildContext context) {
+                  //                 return DescriptionAlert(
+                  //                   translation: translation[0],
+                  //                 );
+                  //               },
+                  //             );
+                  //           },
+                  //           child: Container(
+                  //             decoration: BoxDecoration(
+                  //                 border:
+                  //                     Border.all(color: Colors.black, width: 2),
+                  //                 borderRadius: BorderRadius.circular(10)),
+                  //             // height: size.width * 0.2,
+                  //             // width: infoButton.length == 4
+                  //             //     ? infoButton[3]
+                  //             //     : size.width * 0.25,
+                  //             child: Column(
+                  //               mainAxisAlignment: MainAxisAlignment.center,
+                  //               children: [
+                  //                 Padding(
+                  //                   padding: const EdgeInsets.all(8.0),
+                  //                   child: Icon(
+                  //                     Icons.translate,
+                  //                     size: size.width * 0.08,
+                  //                   ),
+                  //                 ),
+                  //                 // Text(
+                  //                 //   "Translations",
+                  //                 //   textAlign: TextAlign.center,
+                  //                 //   style:
+                  //                 //       TextStyle(fontSize: size.width * 0.04),
+                  //                 // )
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : SizedBox(height: 0),
                   for (var item in pinsList)
                     CustomPin(
                       imageWidth: imageWidth,
@@ -219,8 +219,10 @@ class _DescriptionAlertState extends State<DescriptionAlert> {
                       child: Column(
                         children: [
                           TranslationListItem(
-                              language: "LA",
-                              translation: widget.translation.la),
+                            language: "LA",
+                            translation: widget.translation.la,
+                            imagePath: "assets/images/latin_flag_circular.png",
+                          ),
                           TranslationListItem(
                             language: "DE",
                             translation: widget.translation.de,
@@ -282,51 +284,53 @@ class TranslationListItem extends StatelessWidget {
   final String language, translation, imagePath;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      child: Container(
-        padding: EdgeInsets.only(right: 10),
-        decoration: BoxDecoration(
-            gradient: kDefaultLinearGradient,
-            borderRadius: BorderRadius.circular(15)),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
-              child: imagePath != null
-                  ? Image.asset(
-                      imagePath,
-                      width: 32,
-                    )
-                  : SizedBox(
-                      width: 32,
-                      height: 32,
+    return translation != null
+        ? Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3),
+            child: Container(
+              padding: EdgeInsets.only(right: 10),
+              decoration: BoxDecoration(
+                  gradient: kDefaultLinearGradient,
+                  borderRadius: BorderRadius.circular(15)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+                    child: imagePath != null
+                        ? Image.asset(
+                            imagePath,
+                            width: 32,
+                          )
+                        : SizedBox(
+                            width: 32,
+                            height: 32,
+                          ),
+                  ),
+                  Text(
+                    "${language}: ",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-            ),
-            Text(
-              "${language}: ",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+                  ),
+                  Flexible(
+                    child: Text(
+                      "${translation}",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Flexible(
-              child: Text(
-                "${translation}",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          )
+        : SizedBox();
   }
 }
 
@@ -388,15 +392,10 @@ class CustomPin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(imageWidth);
-    // print(imageHeight);
-    // print(size.width);
+    DatabaseHelper dbHelper = DatabaseHelper();
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     print(padding.right);
     return Positioned(
-      // top: imageWidth > (size.width - 40)
-      //     ? ((size.width - 40) * (imageHeight / imageWidth)) * fromTop
-      //     : imageHeight * fromTop,
       top: imageWidth > (size.width - 40)
           ? (((size.width - 40) * (imageHeight / imageWidth)) / imageHeight) *
                   fromTop -
@@ -407,25 +406,39 @@ class CustomPin extends StatelessWidget {
           : fromLeft - 10,
       child: GestureDetector(
         onTap: () {
-          var _store, transBox, translation;
-          getApplicationDocumentsDirectory().then((Directory dir) {
-            _store =
-                Store(getObjectBoxModel(), directory: dir.path + '/objectbox');
-            transBox = _store.box<Translation>();
-            var query =
-                transBox.query(Translation_.id.equals(translationID)).build();
-            translation = query.find();
+          dbHelper.getTranslationById(translationID).then((translation) {
+            if (translation != null) {
+              showDialog<void>(
+                context: context,
+                barrierDismissible: false, // user must tap button!
+                builder: (BuildContext context) {
+                  return DescriptionAlert(
+                    translation: translation,
+                  );
+                },
+              );
+            }
           });
 
-          showDialog<void>(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return DescriptionAlert(
-                translation: translation[0],
-              );
-            },
-          );
+          print(translationID);
+          // getApplicationDocumentsDirectory().then((Directory dir) {
+          //   _store =
+          //       Store(getObjectBoxModel(), directory: dir.path + '/objectbox');
+          //   transBox = _store.box<Translation>();
+          //   var query =
+          //       transBox.query(Translation_.id.equals(translationID)).build();
+          //   translation = query.find();
+          // });
+
+          // showDialog<void>(
+          //   context: context,
+          //   barrierDismissible: false, // user must tap button!
+          //   builder: (BuildContext context) {
+          //     return DescriptionAlert(
+          //       translation: translation[0],
+          //     );
+          //   },
+          // );
         },
         child: Container(
           decoration: BoxDecoration(

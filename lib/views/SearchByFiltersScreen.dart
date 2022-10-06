@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/db/translation_inserts.dart';
+import 'package:flutterTestApp/funtions.dart';
+import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/views/ResultsByFilterScreen.dart';
 import 'dart:io';
 import 'package:flutterTestApp/objectbox.g.dart';
@@ -19,311 +22,245 @@ class SearchByFiltersScreen extends StatefulWidget {
 }
 
 class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
-  var selectedTypeID, _store, colorsBox;
-  var typesList = [],
-      needlesColorsList = [],
-      leafsColorsList = [],
-      flowersColorsList = [],
-      fruitsColorsList = [];
+  DatabaseHelper dbHelper = DatabaseHelper();
+  var selectedTypeId;
+  List<int> selectedMonthsIds = [];
+  List<int> selectedFlowerColorsIds = [];
+  List<int> selectedFoliageColorsIds = [];
+  List<int> selectedNeedlesColorsIds = [];
+  List<int> selectedFruitColorsIds = [];
+  List<int> plantsWithFoliage = [0, 1, 2, 4, 6, 7];
+  List<int> plantsWithNeedles = [3, 5, 6, 7];
+  var monthsText;
+  var loading = false;
+  changeSelectedType(type) {
+    loading = true;
+    setState(() {
+      selectedTypeId = type;
+      loading = false;
+      selectedNeedlesColorsIds = [];
+      selectedFoliageColorsIds = [];
+    });
+  }
 
-  var monthsList = [
-    [0, "I", "Janvāris", false],
-    [1, "II", "Februāris", false],
-    [2, "III", "Marts", false],
-    [3, "IV", "Aprīlis", false],
-    [4, "V", "Maijs", false],
-    [5, "VI", "Jūnijs", false],
-    [6, "VII", "Jūlijs", false],
-    [7, "VIII", "Augusts", false],
-    [8, "IX", "Septembris", false],
-    [9, "X", "Oktobris", false],
-    [10, "XI", "Novembris", false],
-    [11, "XII", "Decembris", false],
+  var allFlowerColorsList = [];
+  var allFoliageColorsList = [];
+  var allNeedlesColorsList = [];
+  var allFruitColorsList = [];
+  var plantParts = [
+    "flower",
+    "foliage",
+    "fruit",
+    "needles",
   ];
-  var monthsText = "";
-  void changeListColorSelectionState(List list, int id) {
+
+  getData() async {
+    loading = true;
+    for (var part in plantParts) {
+      dbHelper.getUsedColorsByPlantPart(part).then((colorsIds) {
+        var colorsList = [];
+        colorsIds.forEach((colorId) {
+          var foundColor = plantColors.firstWhere(
+              (color) => color["id"] == colorId,
+              orElse: () => null);
+          if (foundColor != null) {
+            colorsList.add(foundColor);
+          }
+        });
+        setState(() {
+          if (part == "flower") {
+            allFlowerColorsList = colorsList;
+          } else if (part == "foliage") {
+            allFoliageColorsList = colorsList;
+          } else if (part == "fruit") {
+            allFruitColorsList = colorsList;
+          } else if (part == "needles") {
+            allNeedlesColorsList = colorsList;
+          }
+          print(colorsList);
+        });
+      });
+      await Future.delayed(const Duration(milliseconds: 50));
+    }
     setState(() {
-      list[id][3] = !list[id][3];
+      loading = false;
     });
   }
 
-  void changeMonthSelectionState(int id) {
+  onColorClick(type, colorId) {
+    loading = true;
+    var parts = {
+      "flower": selectedFlowerColorsIds,
+      "foliage": selectedFoliageColorsIds,
+      "fruit": selectedFruitColorsIds,
+      "needles": selectedNeedlesColorsIds,
+    };
+    var colorsIdsList = [...parts[type]];
+    var index = colorsIdsList.indexOf(colorId);
+    if (index > -1) {
+      colorsIdsList.removeAt(index);
+    } else {
+      colorsIdsList.add(colorId);
+    }
     setState(() {
-      monthsList[id][3] = !monthsList[id][3];
-      monthsText = "";
-      monthsList.map((e) {
-        if (e[3]) {
-          print(e[3]);
-          monthsText = monthsText == ""
-              ? e[1].toString()
-              : monthsText + ", " + e[1].toString();
-        }
-      }).toList();
+      if (type == "flower") {
+        selectedFlowerColorsIds = colorsIdsList;
+      } else if (type == "foliage") {
+        selectedFoliageColorsIds = colorsIdsList;
+      } else if (type == "fruit") {
+        selectedFruitColorsIds = colorsIdsList;
+      } else if (type == "needles") {
+        selectedNeedlesColorsIds = colorsIdsList;
+      }
+      loading = false;
     });
   }
 
-  void changeSelectionItemState(int id) {
-    setState(() {
-      selectedTypeID = id;
-      needlesColorsList.map((e) => e[3] = false).toList();
-      leafsColorsList.map((e) => e[3] = false).toList();
-      flowersColorsList.map((e) => e[3] = false).toList();
-      fruitsColorsList.map((e) => e[3] = false).toList();
-      monthsList.map((e) => e[3] = false).toList();
-      monthsText = "";
+  onMonthClick(monthId) {
+    loading = true;
+    var index = selectedMonthsIds.indexOf(monthId);
+    if (index > -1) {
+      selectedMonthsIds.removeAt(index);
+    } else {
+      selectedMonthsIds.add(monthId);
+    }
+    var text = "";
+    selectedMonthsIds.forEach((monthId) {
+      var index = selectedMonthsIds.indexOf(monthId);
+      text += index > 0
+          ? ", ${monthsList[monthId - 1]['number']}"
+          : monthsList[monthId - 1]['number'];
     });
+    setState(() {
+      monthsText = text;
+    });
+
+    loading = false;
+  }
+
+  isColorSelected(type, colorId) {
+    var parts = {
+      "flower": selectedFlowerColorsIds,
+      "foliage": selectedFoliageColorsIds,
+      "fruit": selectedFruitColorsIds,
+      "needles": selectedNeedlesColorsIds,
+    };
+    return parts[type].indexOf(colorId) > -1;
+  }
+
+  onSearch() {
+    if (selectedTypeId != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ResultsByFilterScreen(
+            plantTypeId: selectedTypeId,
+            flowersColorsIdsList: selectedFlowerColorsIds,
+            needlesColorsIdsList: selectedNeedlesColorsIds,
+            fruitsColorsIdsList: selectedFruitColorsIds,
+            foliageColorsIdsList: selectedFoliageColorsIds,
+            floweringMonthsList: selectedMonthsIds,
+          ),
+        ),
+      );
+    } else {
+      showAlertDialog(context,
+          'Lai varētu veikt meklēšanu pēc pazīmēm, lūdzu aizpildiet "Auga tips" lauku! ');
+    }
   }
 
   @override
   void initState() {
+    getData();
     super.initState();
-  }
-
-  getSpecColorsList(List listToChange, String boxName) {
-    var transColorsBox;
-    switch (boxName) {
-      case "needlesColors":
-        transColorsBox = _store.box<NeedlesColors>();
-        break;
-      case "flowersColors":
-        transColorsBox = _store.box<FlowersColors>();
-        break;
-      case "leafsColors":
-        transColorsBox = _store.box<LeafsColors>();
-        break;
-      case "fruitsColors":
-        transColorsBox = _store.box<FruitsColors>();
-        break;
-    }
-    var query1 = transColorsBox.query().build();
-    List results = query1.find();
-
-    results.map((e) {
-      var colorModel = colorsBox.get(e.id);
-      if (colorModel != null) {
-        bool isInArray = false;
-        listToChange.map((element) {
-          if (element[0] == e.id) {
-            isInArray = true;
-          }
-        }).toList();
-        if (!isInArray) {
-          listToChange
-              .add([e.id, colorModel.title, colorModel.colorCode, false]);
-        }
-      }
-    }).toList();
-  }
-
-  Future<dynamic> fetchData() async {
-    getApplicationDocumentsDirectory().then((Directory dir) {
-      _store = Store(getObjectBoxModel(), directory: dir.path + '/objectbox');
-      var plantTypeBox = _store.box<PlantType>();
-      colorsBox = _store.box<CustomColor>();
-      getSpecColorsList(flowersColorsList, "flowersColors");
-      getSpecColorsList(needlesColorsList, "needlesColors");
-      getSpecColorsList(leafsColorsList, "leafsColors");
-      getSpecColorsList(fruitsColorsList, "fruitsColors");
-      var allPlantTypes = plantTypeBox.getAll();
-      allPlantTypes.map((e) {
-        bool isInArray = false;
-        typesList.map((element) {
-          if (element[0] == e.id) {
-            isInArray = true;
-          }
-        }).toList();
-        if (!isInArray) {
-          if (e.title.trim().contains(' ')) {
-            var indexOfWhitespace = e.title.indexOf(' ');
-            var imagePath = e.title.substring(0, indexOfWhitespace) +
-                "_" +
-                e.title.substring(indexOfWhitespace + 1) +
-                ".png";
-            typesList.add([e.id, e.title, imagePath]);
-          } else {
-            typesList.add([e.id, e.title, e.title + ".png"]);
-          }
-        }
-      }).toList();
-    });
-    return [flowersColorsList];
-  }
-
-  getSelectedColorsFromList(list) {
-    return list.where((e) => e[3] == true).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultView(
-      title: "Meklēšana pēc augu pazīmēm",
-      child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: FutureBuilder(
-              future: fetchData(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Column(
-                    children: [
-                      SearchFieldButton(
-                          title: "Auga tips",
-                          dialogFunction: () => showMaterialDialog(),
-                          selectedType: selectedTypeID != null
-                              ? typesList[selectedTypeID]
-                              : null),
-                      SearchFieldButton(
-                        title: "Ziedu krāsa",
-                        dialogFunction: () => showColorsDialogBox(
-                            flowersColorsList, "Ziedu krāsa"),
-                        colorsList:
-                            getSelectedColorsFromList(flowersColorsList),
-                      ),
-                      SearchFieldButton(
-                        title: "Ziedēšanas laiks",
-                        monthsText: monthsText,
-                        dialogFunction: () => showMonthsDialog(),
-                      ),
-                      SearchFieldButton(
-                        title: "Augļu krāsa",
-                        dialogFunction: () => showColorsDialogBox(
-                            fruitsColorsList, "Augļu krāsa"),
-                        colorsList: getSelectedColorsFromList(fruitsColorsList),
-                      ),
-                      selectedTypeID == 2 || selectedTypeID == 5
-                          ? SearchFieldButton(
-                              title: "Lapu krāsa",
-                              dialogFunction: () => showColorsDialogBox(
-                                  leafsColorsList, "Lapu krāsa"),
-                              colorsList:
-                                  getSelectedColorsFromList(leafsColorsList),
-                            )
-                          : SizedBox(),
-                      selectedTypeID == 3 || selectedTypeID == 6
-                          ? SearchFieldButton(
-                              title: "Skuju krāsa",
-                              dialogFunction: () => showColorsDialogBox(
-                                  needlesColorsList, "Skuju krāsa"),
-                              colorsList:
-                                  getSelectedColorsFromList(needlesColorsList))
-                          : SizedBox(),
-                      GestureDetector(
-                        onTap: () {
-                          if (selectedTypeID != null) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ResultsByFilterScreen(
-                                  plantType: selectedTypeID != null
-                                      ? [
-                                          typesList[selectedTypeID][1],
-                                          typesList[selectedTypeID][0]
-                                        ]
-                                      : [],
-                                  flowersColorsList: getSelectedColorsFromList(
-                                      flowersColorsList),
-                                  needlesColorsList: getSelectedColorsFromList(
-                                      needlesColorsList),
-                                  leafsColorsList: getSelectedColorsFromList(
-                                      leafsColorsList),
-                                  fruitsColorsList: getSelectedColorsFromList(
-                                      fruitsColorsList),
-                                  floweringMonthsList: monthsList
-                                      .where((e) => e[3] == true)
-                                      .toList(),
-                                ),
-                              ),
-                            );
-                          } else {
-                            showDialog(
-                              context: context,
-                              builder: (_) => new CupertinoAlertDialog(
-                                content: Container(
-                                  child: Column(children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Icon(Icons.close),
-                                        ),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.warning_amber_outlined,
-                                      size: 50,
-                                      color: Colors.red,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: Text(
-                                        'Lai varētu veikt meklēšanu pēc pazīmēm, lūdzu aizpildiet "Auga tips" lauku! ',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                            color: Colors.red),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        height: 30,
-                                        child: Center(
-                                          child: Text(
-                                            "Atgriezties",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ]),
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width - 80,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFFf0ec74),
-                          ),
-                          child: Align(
-                            child: Text(
-                              "Meklēt",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+        title: "Meklēšana pēc augu pazīmēm",
+        child: loading
+            ? CircularProgressIndicator()
+            : Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  children: [
+                    SearchFieldButton(
+                        title: "Auga tips",
+                        dialogFunction: () => showMaterialDialog(),
+                        selectedTypeId: selectedTypeId),
+                    SearchFieldButton(
+                      title: "Ziedēšanas laiks",
+                      monthsText: monthsText,
+                      dialogFunction: () => showMonthsDialog(),
+                    ),
+                    //Mēnesis
+                    SearchFieldButton(
+                      title: "Ziedu krāsa",
+                      dialogFunction: () => showColorsDialogBox("flower"),
+                      colorsIdsList: selectedFlowerColorsIds,
+                    ),
+                    SearchFieldButton(
+                      title: "Augļa krāsa",
+                      dialogFunction: () => showColorsDialogBox("fruit"),
+                      colorsIdsList: selectedFruitColorsIds,
+                    ),
+                    plantsWithFoliage.contains(selectedTypeId)
+                        ? SearchFieldButton(
+                            title: "Lapu krāsa",
+                            dialogFunction: () =>
+                                showColorsDialogBox("foliage"),
+                            colorsIdsList: selectedFoliageColorsIds,
+                          )
+                        : SizedBox(),
+                    plantsWithNeedles.contains(selectedTypeId)
+                        ? SearchFieldButton(
+                            title: "Skuju krāsa",
+                            dialogFunction: () =>
+                                showColorsDialogBox("needles"),
+                            colorsIdsList: selectedNeedlesColorsIds,
+                          )
+                        : SizedBox(),
+                    GestureDetector(
+                      onTap: () => onSearch(),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 80,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xFFf0ec74),
+                        ),
+                        child: Align(
+                          child: Text(
+                            "Meklēt",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  );
-                } else {
-                  return CircularProgressIndicator();
-                }
-              })),
-    );
+                    )
+                  ],
+                ),
+              ));
   }
 
-  showMonthsDialog() {
+  showColorsDialogBox(String type) {
+    var titlesList = {
+      "flower": "Ziedu krāsa",
+      "fruit": "Augļa krāsa",
+      "foliage": "Lapu krāsa",
+      "needles": "Skuju krāsa",
+    };
+    var colorsList = {
+      "flower": allFlowerColorsList,
+      "fruit": allFruitColorsList,
+      "foliage": allFoliageColorsList,
+      "needles": allNeedlesColorsList,
+    };
+    var title = titlesList[type];
+    var colors = colorsList[type];
     showDialog(
       context: context,
       builder: (_) => new CupertinoAlertDialog(
@@ -341,22 +278,21 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
               ],
             ),
             Text(
-              "Ziedēšanas laiks",
+              "$title",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: 10),
             Column(
-              children: monthsList
-                  .map(
-                    (month) => MonthSelectionItem(
-                      monthRoman: month[1],
-                      monthTitle: month[2],
-                      isSelected: month[3],
-                      onSelected: () => changeMonthSelectionState(month[0]),
-                    ),
-                  )
-                  .toList(),
-            )
+              children: colors.map((color) {
+                // return SizedBox();
+                return ColorSelectionItem(
+                  color: color["hexCode"],
+                  colorTitle: color["color_lv"],
+                  isSelected: isColorSelected(type, color["id"]),
+                  onSelection: () => onColorClick(type, color["id"]),
+                );
+              }).toList(),
+            ),
           ]),
         ),
       ),
@@ -386,18 +322,14 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
             ),
             SizedBox(height: 10),
             Column(
-                children: typesList.map(
-              (e) {
-                var index = typesList.indexOf(e);
-
+                children: plantsGroups.map(
+              (group) {
                 return SelectionItem(
-                  id: index,
-                  title: typesList[index][1],
-                  isSelected: selectedTypeID,
-                  imagePath: typesList[index][2],
-                  stateSetter: () {
-                    changeSelectionItemState(index);
-                  },
+                  id: group.id,
+                  title: group.text,
+                  imagePath: group.imageName,
+                  onPress: () => changeSelectedType(group.id),
+                  isSelected: group.id == selectedTypeId,
                 );
               },
             ).toList()),
@@ -407,7 +339,7 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
     );
   }
 
-  showColorsDialogBox(List listToChange, String title) {
+  showMonthsDialog() {
     showDialog(
       context: context,
       builder: (_) => new CupertinoAlertDialog(
@@ -425,24 +357,22 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
               ],
             ),
             Text(
-              "$title",
+              "Ziedēšanas laiks",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: 10),
             Column(
-              children: listToChange.map((e) {
-                var index = listToChange.indexOf(e);
-
-                // return SizedBox();
-                return ColorSelectionItem(
-                  color: e[2],
-                  colorTitle: e[1],
-                  isSelected: e[3],
-                  onSelection: () =>
-                      changeListColorSelectionState(listToChange, index),
-                );
-              }).toList(),
-            ),
+              children: monthsList
+                  .map(
+                    (month) => MonthSelectionItem(
+                      monthRoman: month["number"],
+                      monthTitle: month["lv_month"],
+                      isSelected: selectedMonthsIds.indexOf(month["id"]) > -1,
+                      onTap: () => onMonthClick(month["id"]),
+                    ),
+                  )
+                  .toList(),
+            )
           ]),
         ),
       ),

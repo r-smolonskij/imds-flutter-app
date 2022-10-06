@@ -5,13 +5,13 @@ class MonthSelectionItem extends StatefulWidget {
     Key key,
     this.monthRoman,
     this.monthTitle,
-    this.onSelected,
+    this.onTap,
     this.isSelected,
   }) : super(key: key);
 
   final String monthRoman;
   final String monthTitle;
-  final Function onSelected;
+  final Function onTap;
   final bool isSelected;
 
   @override
@@ -38,32 +38,36 @@ class _MonthSelectionItemState extends State<MonthSelectionItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onSelected();
+        widget.onTap();
         changeSelectionState();
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  Text(
-                    "${widget.monthRoman}. ${widget.monthTitle}",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.start,
-                  ),
-                ],
+        child: Container(
+          color: Color(0x00FFFFFF),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Text(
+                      "${widget.monthRoman}. ${widget.monthTitle}",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Icon(
-              localIsSelected
-                  ? Icons.check_box_outlined
-                  : Icons.check_box_outline_blank,
-              size: 30,
-            )
-          ],
+              Icon(
+                localIsSelected
+                    ? Icons.check_box_outlined
+                    : Icons.check_box_outline_blank,
+                size: 30,
+              )
+            ],
+          ),
         ),
       ),
     );
