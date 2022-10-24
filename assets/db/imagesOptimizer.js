@@ -1,4 +1,5 @@
-//JS CODEconst MAX_WIDTH = 320;
+//JS CODE
+//Package https://github.com/eligrey/FileSaver.js
 const MAX_HEIGHT = 320;
 const MIME_TYPE = "image/jpeg";
 const QUALITY = 0.9;
@@ -72,6 +73,7 @@ function readableBytes(bytes) {
 
   return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i];
 }
+
 
 //HTML CODE
 <div id="root">

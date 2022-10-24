@@ -120,9 +120,9 @@ class _InteractivePhotosListScreenState
                   ],
                 ),
                 SingleImage(
-                  imageTitle: "ziedkopa_1.png",
+                  imageTitle: "Ziedkopas_main.png",
                   title: "Ziedkopas",
-                  originalImageTitle: "ziedkopa_1.png",
+                  originalImageTitle: "Ziedkopas_main.png",
                   onPress: () => {
                     Navigator.push(
                       context,
@@ -206,7 +206,10 @@ class SingleImage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width / 2 - 40,
                         fit: BoxFit.contain,
                       )
-                    : null,
+                    : Container(
+                        height: MediaQuery.of(context).size.width / 2 - 40,
+                        width: MediaQuery.of(context).size.width / 2 - 40,
+                      ),
               ),
               SizedBox(
                 height: 5,

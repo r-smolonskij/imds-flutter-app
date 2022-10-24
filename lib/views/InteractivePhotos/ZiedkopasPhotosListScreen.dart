@@ -15,6 +15,7 @@ class _ZiedkopasPhotosListScreenState extends State<ZiedkopasPhotosListScreen> {
   Widget build(BuildContext context) {
     return DefaultView(
       title: "Ziedkopas",
+      goBack: true,
       child: Column(
         children: [
           Padding(
