@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:flutterTestApp/models/models.dart';
-import 'package:flutterTestApp/objectbox.g.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutterTestApp/views/SingleTranslationScreen.dart';
 import 'package:flutterTestApp/constants.dart';
 
@@ -36,16 +32,6 @@ class SearchResultsListItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
-          var _store, transBox, translation;
-          getApplicationDocumentsDirectory().then((Directory dir) {
-            _store =
-                Store(getObjectBoxModel(), directory: dir.path + '/objectbox');
-            transBox = _store.box<Translation>();
-            var query = transBox
-                .query(Translation_.id.equals(translationWordID))
-                .build();
-            translation = query.find();
-          });
           Navigator.push(
             context,
             MaterialPageRoute(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterTestApp/app_localizations.dart';
 
 showAlertDialog(context, text) {
   showDialog(
@@ -58,4 +59,8 @@ showAlertDialog(context, text) {
       ),
     ),
   );
+}
+
+getTranslation(context, codeName) {
+  return AppLocalizations.of(context).translate(codeName).toString();
 }

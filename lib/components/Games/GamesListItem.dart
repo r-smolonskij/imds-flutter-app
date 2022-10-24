@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/views/Games/GameSettingsScreen.dart';
 
 class GamesListItem extends StatelessWidget {
@@ -29,7 +30,7 @@ class GamesListItem extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 10),
               child: Center(
                 child: Text(
-                  gamesList[gameType],
+                  getTranslation(context, gamesList[gameType]),
                   style: TextStyle(
                     fontSize: 22,
                     color: kDefaultColor,

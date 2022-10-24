@@ -2,14 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
-import 'package:flutterTestApp/db/translation_inserts.dart';
 import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/views/ResultsByFilterScreen.dart';
-import 'dart:io';
-import 'package:flutterTestApp/objectbox.g.dart';
-import 'package:flutterTestApp/models/models.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutterTestApp/components/SearchByFilters/ColorSelectionItem.dart';
 import 'package:flutterTestApp/components/SearchByFilters/MonthSelectionItem.dart';
 import 'package:flutterTestApp/components/SearchByFilters/SelectionItem.dart';
@@ -177,7 +172,7 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultView(
-        title: "Meklēšana pēc augu pazīmēm",
+        title: getTranslation(context, "search_by_filters"),
         child: loading
             ? CircularProgressIndicator()
             : Container(
@@ -185,28 +180,28 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
                 child: Column(
                   children: [
                     SearchFieldButton(
-                        title: "Auga tips",
+                        title: getTranslation(context, "plant_type"),
                         dialogFunction: () => showMaterialDialog(),
                         selectedTypeId: selectedTypeId),
                     SearchFieldButton(
-                      title: "Ziedēšanas laiks",
+                      title: getTranslation(context, "flowering_time"),
                       monthsText: monthsText,
                       dialogFunction: () => showMonthsDialog(),
                     ),
                     //Mēnesis
                     SearchFieldButton(
-                      title: "Ziedu krāsa",
+                      title: getTranslation(context, "flower_color"),
                       dialogFunction: () => showColorsDialogBox("flower"),
                       colorsIdsList: selectedFlowerColorsIds,
                     ),
                     SearchFieldButton(
-                      title: "Augļa krāsa",
+                      title: getTranslation(context, "fruit_color"),
                       dialogFunction: () => showColorsDialogBox("fruit"),
                       colorsIdsList: selectedFruitColorsIds,
                     ),
                     plantsWithFoliage.contains(selectedTypeId)
                         ? SearchFieldButton(
-                            title: "Lapu krāsa",
+                            title: getTranslation(context, "foliage_color"),
                             dialogFunction: () =>
                                 showColorsDialogBox("foliage"),
                             colorsIdsList: selectedFoliageColorsIds,
@@ -214,7 +209,7 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
                         : SizedBox(),
                     plantsWithNeedles.contains(selectedTypeId)
                         ? SearchFieldButton(
-                            title: "Skuju krāsa",
+                            title: getTranslation(context, "needles_color"),
                             dialogFunction: () =>
                                 showColorsDialogBox("needles"),
                             colorsIdsList: selectedNeedlesColorsIds,
@@ -231,7 +226,7 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
                         ),
                         child: Align(
                           child: Text(
-                            "Meklēt",
+                            getTranslation(context, "search"),
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -248,10 +243,10 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
 
   showColorsDialogBox(String type) {
     var titlesList = {
-      "flower": "Ziedu krāsa",
-      "fruit": "Augļa krāsa",
-      "foliage": "Lapu krāsa",
-      "needles": "Skuju krāsa",
+      "flower": getTranslation(context, "flower_color"),
+      "fruit": getTranslation(context, "fruit_color"),
+      "foliage": getTranslation(context, "foliage_color"),
+      "needles": getTranslation(context, "needles_color"),
     };
     var colorsList = {
       "flower": allFlowerColorsList,
@@ -317,7 +312,7 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
               ],
             ),
             Text(
-              "Auga tips",
+              getTranslation(context, "plant_type"),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: 10),
@@ -366,7 +361,8 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
                   .map(
                     (month) => MonthSelectionItem(
                       monthRoman: month["number"],
-                      monthTitle: month["lv_month"],
+                      monthTitle:
+                          getTranslation(context, month['month_translation']),
                       isSelected: selectedMonthsIds.indexOf(month["id"]) > -1,
                       onTap: () => onMonthClick(month["id"]),
                     ),

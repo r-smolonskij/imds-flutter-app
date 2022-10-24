@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterTestApp/components/SingleTranslation/ColouredCircle.dart';
 import 'package:flutterTestApp/components/SingleTranslation/PiktoIcon.dart';
 import 'package:flutterTestApp/constants.dart';
-import 'package:flutterTestApp/db/colors_inserts.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 
 class PlantBodyPartColorsList extends StatefulWidget {
@@ -31,9 +31,9 @@ class _PlantBodyPartColorsListState extends State<PlantBodyPartColorsList> {
     "fruit": "Piktogramma_abols_zals.png",
   };
   var tooltipsList = {
-    "flower": "Ziedu krāsa",
-    "foliage": "Lapu krāsa",
-    "fruit": "Augļa krāsa",
+    "flower": "flower_color",
+    "foliage": "foliage_color",
+    "fruit": "fruit_color",
   };
 
   initState() {
@@ -61,7 +61,7 @@ class _PlantBodyPartColorsListState extends State<PlantBodyPartColorsList> {
   @override
   Widget build(BuildContext context) {
     var imageName = imagesList[widget.type];
-    var toolTip = tooltipsList[widget.type];
+    var toolTip = getTranslation(context, tooltipsList[widget.type]);
     return loading
         ? CircularProgressIndicator()
         : (!loading && colorsList.length > 0)

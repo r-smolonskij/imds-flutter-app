@@ -16,7 +16,6 @@ addWords() async {
         translations[i].ru ?? ""
       ]);
     }
-    print(globalWordsChecker.find("korintas"));
   });
   await Future.delayed(const Duration(milliseconds: 1000));
 }

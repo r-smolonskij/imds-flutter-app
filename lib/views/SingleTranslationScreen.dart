@@ -6,6 +6,7 @@ import 'package:flutterTestApp/components/SingleTranslation/SimpleInfoBox.dart';
 import 'package:flutterTestApp/components/SingleTranslation/TranslationListItem.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/sqlite/translation.dart';
 
@@ -66,18 +67,18 @@ class _SingleTranslationScreenState extends State<SingleTranslationScreen> {
     ['pl', 'pluralis'],
     ['sg', 'singularis'],
   ];
-  var typesList = [
-    ["ģints", Colors.green],
-    ["apakšģints", Colors.yellow],
-    ["suga", Colors.blue],
-    ["pasuga", Colors.purple],
-    ["varietāte", Colors.brown],
-    ["forma", Colors.red],
-    ["šķirņu grupa", Colors.pink],
-  ];
 
   @override
   Widget build(BuildContext context) {
+    var typesList = [
+      [getTranslation(context, "genus"), Colors.green],
+      [getTranslation(context, "subgenus"), Colors.yellow],
+      [getTranslation(context, "species"), Colors.blue],
+      [getTranslation(context, "subspecies"), Colors.purple],
+      [getTranslation(context, "variety"), Colors.brown],
+      [getTranslation(context, "form"), Colors.red],
+      [getTranslation(context, "variety_group"), Colors.pink],
+    ];
     return DefaultView(
       title: "",
       goBack: true,

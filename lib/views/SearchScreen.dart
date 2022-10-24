@@ -68,7 +68,6 @@ class _SearchScreenState extends State<SearchScreen> {
         await Future.delayed(const Duration(milliseconds: 50));
       }
       if (itemsList.length == 0) {
-        print(globalWordsChecker.isWord("korintes"));
         List matches = globalWordsChecker.find(searchText.trim());
         for (var i = 0; i < matches.length; i++) {
           languages.forEach((lang) {

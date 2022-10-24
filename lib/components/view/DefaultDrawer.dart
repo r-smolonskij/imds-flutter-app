@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/views/AboutAppScreen.dart';
 import 'package:flutterTestApp/views/DatabasesDownloadScreen.dart';
 import 'package:flutterTestApp/views/Games/GamesListScreen.dart';
 
-import 'package:flutterTestApp/views/InteractivePhotosListScreen.dart';
+import 'package:flutterTestApp/views/InteractivePhotos/InteractivePhotosListScreen.dart';
 import 'package:flutterTestApp/views/PublicationsScreen.dart';
 import 'package:flutterTestApp/views/SearchByFiltersScreen.dart';
 import 'package:flutterTestApp/views/SearchScreen.dart';
-import 'package:flutterTestApp/views/TestScreen.dart';
+import 'package:flutterTestApp/views/TipsScreen.dart';
 import 'package:flutterTestApp/views/UsedSourcesScreen.dart';
 import 'package:flutterTestApp/views/UsedSymbolsScreen.dart';
 
@@ -29,23 +30,24 @@ class DefaultDrawer extends StatelessWidget {
             ),
           ),
           CustomListTile(
-            title: "Test Screen",
-            navigateTo: TestScreen(),
-          ),
-          CustomListTile(
-            title: AppLocalizations.of(context).translate("search").toString(),
+            title: getTranslation(context, "search"),
             iconName: Icons.search,
             navigateTo: SearchScreen(),
           ),
           CustomListTile(
-            title: "Meklesana pec filtriem",
-            iconName: Icons.search,
+            title: getTranslation(context, "search_by_filters"),
+            iconName: Icons.person_search_outlined,
             navigateTo: SearchByFiltersScreen(),
           ),
           CustomListTile(
-            title: "Izglītojošās spēles",
+            title: getTranslation(context, "educational_games"),
             iconName: Icons.videogame_asset,
             navigateTo: GamesList(),
+          ),
+          CustomListTile(
+            title: getTranslation(context, "tips"),
+            iconName: Icons.model_training,
+            navigateTo: TipsScreen(),
           ),
           CustomListTile(
             title:

@@ -133,7 +133,7 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultView(
-      title: "Spēles iestatījumi",
+      title: getTranslation(context, "game_settings"),
       goBack: true,
       child: Container(
         padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
@@ -142,7 +142,7 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 40),
               child: Text(
-                '"${gamesList[widget.gameType]}" iestatījumi',
+                '"${getTranslation(context, gamesList[widget.gameType])}" ${getTranslation(context, "settings").toLowerCase()}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
@@ -160,7 +160,7 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
                       border: Border.all(width: 2, color: kDefaultColor),
                       borderRadius: BorderRadius.circular(10)),
                   child: Text(
-                    "Sākt spēli",
+                    getTranslation(context, "start_game"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
@@ -184,6 +184,7 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
               MonthDropdownButton(
                 selectedMonthId: mqMonth,
                 onChange: (monthId) => changeMqMonth(monthId),
+                isDisabled: true,
               ),
               mqMonth != null
                   ? Padding(
@@ -206,14 +207,14 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
         ? Column(
             children: [
               LanguageDropdownButton(
-                hintText: "Pirmā valoda",
+                hintText: getTranslation(context, "first_language"),
                 selectedLanguage: ptFirstLanguage,
                 onChange: (newLanguage) => changePtLanguage(newLanguage, true),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: LanguageDropdownButton(
-                  hintText: "Otrā valoda",
+                  hintText: getTranslation(context, "second_language"),
                   selectedLanguage: ptSecondLanguage,
                   onChange: (newLanguage) =>
                       changePtLanguage(newLanguage, false),
@@ -231,14 +232,14 @@ class _GameSettingsScreenState extends State<GameSettingsScreen> {
         ? Column(
             children: [
               LanguageDropdownButton(
-                hintText: "Pirmā valoda",
+                hintText: getTranslation(context, "first_language"),
                 selectedLanguage: wcFirstLanguage,
                 onChange: (newLanguage) => changeWcLanguage(newLanguage, true),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: LanguageDropdownButton(
-                  hintText: "Otrā valoda",
+                  hintText: getTranslation(context, "second_language"),
                   selectedLanguage: wcSecondLanguage,
                   onChange: (newLanguage) =>
                       changeWcLanguage(newLanguage, false),

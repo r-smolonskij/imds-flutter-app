@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterTestApp/funtions.dart';
 
 class LanguageDropdownButton extends StatefulWidget {
   LanguageDropdownButton(
@@ -68,7 +69,7 @@ class _LanguageDropdownButtonState extends State<LanguageDropdownButton> {
       languagesDisplayed = [...languages];
     }
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: Colors.white),
@@ -77,8 +78,9 @@ class _LanguageDropdownButtonState extends State<LanguageDropdownButton> {
         isDense: true,
         style: TextStyle(
             fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
-        hint:
-            Text(widget.hintText != null ? widget.hintText : 'Izvēlies valodu'),
+        hint: Text(widget.hintText != null
+            ? widget.hintText
+            : getTranslation(context, "choose_language")),
         value: widget.selectedLanguage,
         onChanged: widget.isDisabled != null && widget.isDisabled
             ? null

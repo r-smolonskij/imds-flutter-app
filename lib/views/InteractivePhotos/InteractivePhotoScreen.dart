@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
-import 'package:flutterTestApp/objectbox.g.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/views/SingleTranslationScreen.dart';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 
 class InteractivePhotoScreen extends StatelessWidget {
   const InteractivePhotoScreen(
@@ -18,21 +13,15 @@ class InteractivePhotoScreen extends StatelessWidget {
       this.imageWidth,
       this.imageHeight,
       this.pinsList,
-      this.infoButton})
+      this.translationId})
       : super(key: key);
 
   final String title, imageTitle;
   final double imageWidth, imageHeight;
   final List pinsList;
-  final infoButton;
+  final int translationId;
   @override
   Widget build(BuildContext context) {
-    // var imageHeight = 1181.0, imageWidth = 1178.0;
-
-    // var imageWidth = this.imageWidth > 800 ? this.imageWidth : 800.0;
-    // var imageHeight = this.imageWidth > 800
-    //     ? this.imageHeight
-    //     : 800.0 * this.imageHeight / this.imageWidth;
     var size = MediaQuery.of(context).size;
     var padding = MediaQuery.of(context).padding;
     var pinsList = this.pinsList != null ? this.pinsList : [];
@@ -43,6 +32,42 @@ class InteractivePhotoScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              translationId != null
+                  ? Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  SingleTranslationScreen(translationId),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 2,
+                              color: kDefaultColor,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(
+                            Icons.launch_outlined,
+                            color: kDefaultColor,
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox()
+            ],
+          ),
           Container(
             constraints: BoxConstraints(
                 minHeight: MediaQuery.of(context).size.height -
@@ -50,7 +75,7 @@ class InteractivePhotoScreen extends StatelessWidget {
                     60 -
                     MediaQuery.of(context).padding.bottom -
                     MediaQuery.of(context).padding.top),
-            width: MediaQuery.of(context).size.width - 40,
+            width: MediaQuery.of(context).size.width - 20,
             child: Align(
               alignment: Alignment.center,
               child: Stack(
@@ -69,66 +94,6 @@ class InteractivePhotoScreen extends StatelessWidget {
                       : SizedBox(
                           height: 0,
                         ),
-                  // infoButton != null
-                  //     ? Positioned(
-                  //         bottom: 20,
-                  //         right: 0,
-                  //         child: GestureDetector(
-                  //           onTap: () {
-                  //             var _store, transBox, translation;
-                  //             getApplicationDocumentsDirectory()
-                  //                 .then((Directory dir) {
-                  //               _store = Store(getObjectBoxModel(),
-                  //                   directory: dir.path + '/objectbox');
-                  //               transBox = _store.box<Translation>();
-                  //               var query = transBox
-                  //                   .query(
-                  //                       Translation_.id.equals(infoButton[2]))
-                  //                   .build();
-                  //               translation = query.find();
-                  //             });
-                  //             showDialog<void>(
-                  //               context: context,
-                  //               barrierDismissible:
-                  //                   false, // user must tap button!
-                  //               builder: (BuildContext context) {
-                  //                 return DescriptionAlert(
-                  //                   translation: translation[0],
-                  //                 );
-                  //               },
-                  //             );
-                  //           },
-                  //           child: Container(
-                  //             decoration: BoxDecoration(
-                  //                 border:
-                  //                     Border.all(color: Colors.black, width: 2),
-                  //                 borderRadius: BorderRadius.circular(10)),
-                  //             // height: size.width * 0.2,
-                  //             // width: infoButton.length == 4
-                  //             //     ? infoButton[3]
-                  //             //     : size.width * 0.25,
-                  //             child: Column(
-                  //               mainAxisAlignment: MainAxisAlignment.center,
-                  //               children: [
-                  //                 Padding(
-                  //                   padding: const EdgeInsets.all(8.0),
-                  //                   child: Icon(
-                  //                     Icons.translate,
-                  //                     size: size.width * 0.08,
-                  //                   ),
-                  //                 ),
-                  //                 // Text(
-                  //                 //   "Translations",
-                  //                 //   textAlign: TextAlign.center,
-                  //                 //   style:
-                  //                 //       TextStyle(fontSize: size.width * 0.04),
-                  //                 // )
-                  //               ],
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       )
-                  //     : SizedBox(height: 0),
                   for (var item in pinsList)
                     CustomPin(
                       imageWidth: imageWidth,

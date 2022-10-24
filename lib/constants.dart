@@ -52,24 +52,64 @@ List romanNumbers = [
 ];
 
 var monthsList = [
-  {"id": 1, "number": "I", "lv_month": "Janvāris", "is_selected": false},
-  {"id": 2, "number": "II", "lv_month": "Februāris", "is_selected": false},
-  {"id": 3, "number": "III", "lv_month": "Marts", "is_selected": false},
-  {"id": 4, "number": "IV", "lv_month": "Aprīlis", "is_selected": false},
-  {"id": 5, "number": "V", "lv_month": "Maijs", "is_selected": false},
-  {"id": 6, "number": "VI", "lv_month": "Jūnijs", "is_selected": false},
-  {"id": 7, "number": "VII", "lv_month": "Jūlijs", "is_selected": false},
-  {"id": 8, "number": "VIII", "lv_month": "Augusts", "is_selected": false},
-  {"id": 9, "number": "IX", "lv_month": "Septembris", "is_selected": false},
-  {"id": 10, "number": "X", "lv_month": "Oktobris", "is_selected": false},
-  {"id": 11, "number": "XI", "lv_month": "Novembris", "is_selected": false},
-  {"id": 12, "number": "XII", "lv_month": "Decembris", "is_selected": false},
+  {
+    "id": 1,
+    "number": "I",
+    "month_translation": "january",
+    "is_selected": false
+  },
+  {
+    "id": 2,
+    "number": "II",
+    "month_translation": "february",
+    "is_selected": false
+  },
+  {
+    "id": 3,
+    "number": "III",
+    "month_translation": "march",
+    "is_selected": false
+  },
+  {"id": 4, "number": "IV", "month_translation": "april", "is_selected": false},
+  {"id": 5, "number": "V", "month_translation": "may", "is_selected": false},
+  {"id": 6, "number": "VI", "month_translation": "june", "is_selected": false},
+  {"id": 7, "number": "VII", "month_translation": "july", "is_selected": false},
+  {
+    "id": 8,
+    "number": "VIII",
+    "month_translation": "august",
+    "is_selected": false
+  },
+  {
+    "id": 9,
+    "number": "IX",
+    "month_translation": "september",
+    "is_selected": false
+  },
+  {
+    "id": 10,
+    "number": "X",
+    "month_translation": "october",
+    "is_selected": false
+  },
+  {
+    "id": 11,
+    "number": "XI",
+    "month_translation": "november",
+    "is_selected": false
+  },
+  {
+    "id": 12,
+    "number": "XII",
+    "month_translation": "december",
+    "is_selected": false
+  },
 ];
 
 var gamesList = {
-  "monthlyQuestions": "Mēnešu jautājumi",
-  "putTogether": "Saliec kopā",
-  "writeCorrect": "Uzraksti pareizi",
+  "monthlyQuestions": "monthly_questions",
+  "putTogether": "put_together",
+  "writeCorrect": "write_correct",
 };
 
 List<Piktogramma> piktogrammasList = [
@@ -153,10 +193,65 @@ var flagsByCountryCode = {
   "de": "assets/images/german_flag_circular.png"
 };
 
+const tipsByMonth = [
+  {
+    "monthId": 1,
+    "tips": ["Janvāris 1", "Janvāris 2", "Janvāris 3", "Janvāris 4"]
+  },
+  {
+    "monthId": 2,
+    "tips": ["Februāris 1", "Februāris 2", "Februāris 3", "Februāris 4"]
+  },
+  {
+    "monthId": 3,
+    "tips": ["Marts 1", "Marts 2", "Marts 3", "Marts 4"]
+  },
+  {
+    "monthId": 4,
+    "tips": ["Aprīlis 1", "Aprīlis 2", "Aprīlis 3", "Aprīlis 4"]
+  },
+  {
+    "monthId": 5,
+    "tips": ["Maijs 1", "Maijs 2", "Maijs 3", "Maijs 4"]
+  },
+  {
+    "monthId": 6,
+    "tips": ["Jūnijs 1", "Jūnijs 2", "Jūnijs 3", "Jūnijs 4"]
+  },
+  {
+    "monthId": 7,
+    "tips": ["Jūlijs 1", "Jūlijs 2", "Jūlijs 3", "Jūlijs 4"]
+  },
+  {
+    "monthId": 8,
+    "tips": ["Augusts 1", "Augusts 2", "Augusts 3", "Augusts 4"]
+  },
+  {
+    "monthId": 9,
+    "tips": ["Septembris 1", "Septembris 2", "Septembris 3", "Septembris 4"]
+  },
+  {
+    "monthId": 10,
+    "tips": [
+      'Oktobris 1, \n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
+      "Oktobris 2",
+      "Oktobris 3",
+      "Oktobris 4"
+    ]
+  },
+  {
+    "monthId": 11,
+    "tips": ["Novembris 1", "Novembris 2", "Novembris 3", "Novembris 4"]
+  },
+  {
+    "monthId": 12,
+    "tips": ["Decembris 1", "Decembris 2", "Decembris 3", "Decembris 4"]
+  },
+];
+
 const monthsPlantGame = [
   {
     "monthId": 1,
-    "de": {},
     "lv": {
       "plantName": "Parastā egle",
       "questions": [
@@ -797,6 +892,195 @@ const monthsPlantGame = [
             "Aplieva ir dārgāka, nekā kodolkoksne",
           ],
           "correctAnswer": "Aplievas ir gaišās, gandrīz baltās krāsas dēļ"
+        },
+      ]
+    },
+    "de": {
+      "plantName": "Parastā egle",
+      "questions": [
+        {
+          "question": "Kāds ir parastās egles nosaukums latīņu valodā? DE",
+          "answers": [
+            "Picea mariana",
+            "Picea breweriana",
+            "Picea pungens",
+            "Picea abies",
+          ],
+          "correctAnswer": "Picea abies"
+        },
+        {
+          "question": "Vai parastā egle ir visizplatītākā koku suga Latvijā?",
+          "answers": ["Jā", "Nē"],
+          "correctAnswer": "Nē"
+        },
+        {
+          "question":
+              "Ja parasto egli nocērt un izmanto kā Ziemassvētku eglīti, cik ātri tā izžūs un pazaudēs skujas iekštelpās?",
+          "answers": [
+            "4 dienās",
+            "5 dienās",
+            "1-3 nedēļu laikā",
+            "5 nedēļu laikā",
+          ],
+          "correctAnswer": "1-3 nedēļu laikā"
+        },
+        {
+          "question":
+              "Cik Dainu skapī ir dainas, kurās min egles mūžzaļo dabu?",
+          "answers": [
+            "1",
+            "3",
+            "8",
+            "16",
+          ],
+          "correctAnswer": "16"
+        },
+        {
+          "question": "Kāpēc parastā egle ir īpaši piemērota papīra ražošanai?",
+          "answers": [
+            "Koksnes gaišā krāsa",
+            "Koka garuma dēļ",
+            "Viegla skuju nošķiršana pārstrādes procesā",
+            "Garas koka šķiedras",
+          ],
+          "correctAnswer": "Garas koka šķiedras"
+        },
+        {
+          "question":
+              "Kāpēc parastā egle kā izejmateriāls ir stīgu mūzikas instrumentu ražošanas etalons?",
+          "answers": [
+            "Lēts kokmateriāls",
+            "Koksne ir blīva",
+            "Koksne nav blīva, ir skanīga un elastīga",
+            "Izmanto tradīciju dēļ",
+          ],
+          "correctAnswer": "Koksne nav blīva, ir skanīga un elastīga"
+        },
+      ]
+    },
+    "en": {
+      "plantName": "Parastā egle",
+      "questions": [
+        {
+          "question": "Kāds ir parastās egles nosaukums latīņu valodā?",
+          "answers": [
+            "Picea mariana",
+            "Picea breweriana",
+            "Picea pungens",
+            "Picea abies",
+          ],
+          "correctAnswer": "Picea abies"
+        },
+        {
+          "question": "Vai parastā egle ir visizplatītākā koku suga Latvijā?",
+          "answers": ["Jā", "Nē"],
+          "correctAnswer": "Nē"
+        },
+        {
+          "question":
+              "Ja parasto egli nocērt un izmanto kā Ziemassvētku eglīti, cik ātri tā izžūs un pazaudēs skujas iekštelpās?",
+          "answers": [
+            "4 dienās",
+            "5 dienās",
+            "1-3 nedēļu laikā",
+            "5 nedēļu laikā",
+          ],
+          "correctAnswer": "1-3 nedēļu laikā"
+        },
+        {
+          "question":
+              "Cik Dainu skapī ir dainas, kurās min egles mūžzaļo dabu?",
+          "answers": [
+            "1",
+            "3",
+            "8",
+            "16",
+          ],
+          "correctAnswer": "16"
+        },
+        {
+          "question": "Kāpēc parastā egle ir īpaši piemērota papīra ražošanai?",
+          "answers": [
+            "Koksnes gaišā krāsa",
+            "Koka garuma dēļ",
+            "Viegla skuju nošķiršana pārstrādes procesā",
+            "Garas koka šķiedras",
+          ],
+          "correctAnswer": "Garas koka šķiedras"
+        },
+        {
+          "question":
+              "Kāpēc parastā egle kā izejmateriāls ir stīgu mūzikas instrumentu ražošanas etalons?",
+          "answers": [
+            "Lēts kokmateriāls",
+            "Koksne ir blīva",
+            "Koksne nav blīva, ir skanīga un elastīga",
+            "Izmanto tradīciju dēļ",
+          ],
+          "correctAnswer": "Koksne nav blīva, ir skanīga un elastīga"
+        },
+      ]
+    },
+    "ru": {
+      "plantName": "Parastā egle",
+      "questions": [
+        {
+          "question": "Kāds ir parastās egles nosaukums latīņu valodā?",
+          "answers": [
+            "Picea mariana",
+            "Picea breweriana",
+            "Picea pungens",
+            "Picea abies",
+          ],
+          "correctAnswer": "Picea abies"
+        },
+        {
+          "question": "Vai parastā egle ir visizplatītākā koku suga Latvijā?",
+          "answers": ["Jā", "Nē"],
+          "correctAnswer": "Nē"
+        },
+        {
+          "question":
+              "Ja parasto egli nocērt un izmanto kā Ziemassvētku eglīti, cik ātri tā izžūs un pazaudēs skujas iekštelpās?",
+          "answers": [
+            "4 dienās",
+            "5 dienās",
+            "1-3 nedēļu laikā",
+            "5 nedēļu laikā",
+          ],
+          "correctAnswer": "1-3 nedēļu laikā"
+        },
+        {
+          "question":
+              "Cik Dainu skapī ir dainas, kurās min egles mūžzaļo dabu?",
+          "answers": [
+            "1",
+            "3",
+            "8",
+            "16",
+          ],
+          "correctAnswer": "16"
+        },
+        {
+          "question": "Kāpēc parastā egle ir īpaši piemērota papīra ražošanai?",
+          "answers": [
+            "Koksnes gaišā krāsa",
+            "Koka garuma dēļ",
+            "Viegla skuju nošķiršana pārstrādes procesā",
+            "Garas koka šķiedras",
+          ],
+          "correctAnswer": "Garas koka šķiedras"
+        },
+        {
+          "question":
+              "Kāpēc parastā egle kā izejmateriāls ir stīgu mūzikas instrumentu ražošanas etalons?",
+          "answers": [
+            "Lēts kokmateriāls",
+            "Koksne ir blīva",
+            "Koksne nav blīva, ir skanīga un elastīga",
+            "Izmanto tradīciju dēļ",
+          ],
+          "correctAnswer": "Koksne nav blīva, ir skanīga un elastīga"
         },
       ]
     }

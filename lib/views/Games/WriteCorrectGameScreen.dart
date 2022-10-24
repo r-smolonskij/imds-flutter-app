@@ -6,6 +6,7 @@ import 'package:flutterTestApp/components/Loader.dart';
 import 'package:flutterTestApp/components/RegularCustomButton.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/sqlite/translation.dart';
 
@@ -260,7 +261,7 @@ class _WriteCorrectGameScreenState extends State<WriteCorrectGameScreen> {
                     padding: const EdgeInsets.only(top: 20, bottom: 10),
                     child: RegularCustomButton(
                       onPress: () => onAnswerSubmit(),
-                      text: "Iesniegt atbildi",
+                      text: getTranslation(context, "submit_answer"),
                       backgroundColor: writtenAnswer.length > 0
                           ? kDefaultColor
                           : Colors.grey,
@@ -275,7 +276,7 @@ class _WriteCorrectGameScreenState extends State<WriteCorrectGameScreen> {
                   ),
                   RegularCustomButton(
                     onPress: () => goToNextQuestion(),
-                    text: "Izlaist",
+                    text: getTranslation(context, "skip"),
                     backgroundColor: Colors.red,
                     borderWidth: 0,
                     textStyle: TextStyle(

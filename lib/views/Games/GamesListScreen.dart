@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterTestApp/components/Games/GamesListItem.dart';
 import 'package:flutterTestApp/components/Games/LanguageDropdownButton.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
+import 'package:flutterTestApp/funtions.dart';
 
 class GamesList extends StatefulWidget {
   const GamesList({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class _GamesListState extends State<GamesList> {
   @override
   Widget build(BuildContext context) {
     return DefaultView(
-      title: "Spēļu saraksts",
+      title: getTranslation(context, "games_list"),
       child: Container(
         padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
         child: Column(

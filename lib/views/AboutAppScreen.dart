@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
-import '../db/globals.dart' as globals;
 
 class AbboutAppScreen extends StatefulWidget {
   @override
@@ -11,7 +10,6 @@ class AbboutAppScreen extends StatefulWidget {
 class _AbboutAppScreenState extends State<AbboutAppScreen> {
   @override
   void initState() {
-    print(globals.isLoggedIn);
     super.initState();
   }
 

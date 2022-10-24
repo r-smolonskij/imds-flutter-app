@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/sqlite/translation.dart';
 import 'package:flutterTestApp/views/SingleTranslationScreen.dart';
@@ -35,7 +36,7 @@ class _ResultsByFilterScreenState extends State<ResultsByFilterScreen> {
   var loading = false;
   @override
   void initState() {
-    textsList.add("Auga tips ");
+    textsList.add("Auga tips");
     getData();
     loadDataFromDb();
     // TODO: implement initState
@@ -113,7 +114,7 @@ class _ResultsByFilterScreenState extends State<ResultsByFilterScreen> {
       }
     }).toList();
     return DefaultView(
-      title: "Rezultāti pēc filtrācijas",
+      title: getTranslation(context, "results_after_filter"),
       goBack: true,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -136,29 +137,29 @@ class _ResultsByFilterScreenState extends State<ResultsByFilterScreen> {
                         children: [
                           ListWithText(
                             lettersCount: lettersCount,
-                            title: "Auga tips",
+                            title: getTranslation(context, "plant_type"),
                             text: typeText,
                           ),
                           ListWithText(
                               lettersCount: lettersCount,
-                              title: "Ziedu krāsa",
+                              title: getTranslation(context, "flower_color"),
                               colorsIdsList: widget.flowersColorsIdsList),
                           ListWithText(
                             lettersCount: lettersCount,
-                            title: "Ziedēšanas laiks",
+                            title: getTranslation(context, "flowering_time"),
                             text: monthsText,
                           ),
                           ListWithText(
                               lettersCount: lettersCount,
-                              title: "Augļa krāsa",
+                              title: getTranslation(context, "fruit_color"),
                               colorsIdsList: widget.fruitsColorsIdsList),
                           ListWithText(
                               lettersCount: lettersCount,
-                              title: "Lapu krāsa",
+                              title: getTranslation(context, "foliage_color"),
                               colorsIdsList: widget.foliageColorsIdsList),
                           ListWithText(
                               lettersCount: lettersCount,
-                              title: "Skuju krāsa",
+                              title: getTranslation(context, "needles_color"),
                               colorsIdsList: widget.needlesColorsIdsList),
                         ],
                       )),
@@ -207,267 +208,49 @@ class _ResultsByFilterScreenState extends State<ResultsByFilterScreen> {
                         )
                       : Column(
                           children: foundTranslations.map((translation) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      SingleTranslationScreen(translation.id),
-                                ),
-                              );
-                            },
-                            child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                margin: EdgeInsets.only(bottom: 10),
-                                width: MediaQuery.of(context).size.width - 40,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: kDefaultColor, width: 1.5),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        "${translation.la}",
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w600,
-                                          color: kDefaultColor,
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        SingleTranslationScreen(translation.id),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  width: MediaQuery.of(context).size.width - 40,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: kDefaultColor, width: 1.5),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          "${translation.la}",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w600,
+                                            color: kDefaultColor,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Icon(
-                                      Icons.launch_outlined,
-                                      color: kDefaultColor,
-                                    ),
-                                  ],
-                                )),
-                          );
-                        }).toList())
+                                      Icon(
+                                        Icons.launch_outlined,
+                                        color: kDefaultColor,
+                                      ),
+                                    ],
+                                  )),
+                            );
+                          }).toList(),
+                        ),
             ],
-            // children: [
-            //   Padding(
-            //     padding: const EdgeInsets.only(bottom: 10),
-            //     child: Container(
-            //       width: MediaQuery.of(context).size.width - 40,
-            //       decoration: BoxDecoration(
-            //         gradient: kDefaultLinearGradient,
-            //         borderRadius: BorderRadius.circular(10),
-            //       ),
-            //       child: Padding(
-            //         padding: const EdgeInsets.symmetric(
-            //             horizontal: 20, vertical: 15),
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             widget.plantType.length != 0
-            //                 ? Padding(
-            //                     padding:
-            //                         const EdgeInsets.symmetric(vertical: 5),
-            //                     child: Container(
-            //                         width:
-            //                             MediaQuery.of(context).size.width - 80,
-            //                         decoration: BoxDecoration(
-            //                           borderRadius: BorderRadius.circular(10),
-            //                           border: Border.all(
-            //                             width: 1,
-            //                             color: Colors.white,
-            //                           ),
-            //                         ),
-            //                         child: Row(
-            //                           children: [
-            //                             Container(
-            //                               width: lettersCount * 9.0,
-            //                               decoration: BoxDecoration(
-            //                                 gradient: kDefaultLinearGradient,
-            //                                 borderRadius: BorderRadius.only(
-            //                                     topLeft: Radius.circular(10),
-            //                                     bottomLeft:
-            //                                         Radius.circular(10)),
-            //                               ),
-            //                               padding: EdgeInsets.symmetric(
-            //                                   horizontal: 5, vertical: 5),
-            //                               child: Center(
-            //                                 child: Padding(
-            //                                   padding:
-            //                                       const EdgeInsets.symmetric(
-            //                                           vertical: 4),
-            //                                   child: Text(
-            //                                     "Auga tips",
-            //                                     style: TextStyle(
-            //                                       color: Colors.white,
-            //                                       fontSize: 17,
-            //                                       fontWeight: FontWeight.bold,
-            //                                     ),
-            //                                   ),
-            //                                 ),
-            //                               ),
-            //                             ),
-            //                             Container(
-            //                               child: Flexible(
-            //                                 child: Center(
-            //                                   child: Padding(
-            //                                     padding: const EdgeInsets.only(
-            //                                         left: 5),
-            //                                     child: Text(
-            //                                       widget.plantType.length != 0
-            //                                           ? widget.plantType[0]
-            //                                           : "",
-            //                                       // overflow: TextOverflow.ellipsis,
-            //                                       style: TextStyle(
-            //                                         color: Colors.white,
-            //                                         fontSize: 17,
-            //                                         fontWeight: FontWeight.bold,
-            //                                       ),
-            //                                     ),
-            //                                   ),
-            //                                 ),
-            //                               ),
-            //                             ),
-            //                           ],
-            //                         )),
-            //                   )
-            //                 : SizedBox(height: 0),
-            //             ListWithColouredCircles(
-            //                 lettersCount: lettersCount,
-            //                 title: "Ziedu krāsa",
-            //                 colorsList: widget.flowersColorsList),
-            //             ListWithText(
-            //               lettersCount: lettersCount,
-            //               title: "Ziedēšanas laiks",
-            //               textsList: widget.floweringMonthsList,
-            //             ),
-            //             ListWithColouredCircles(
-            //                 lettersCount: lettersCount,
-            //                 title: "Lapu krāsa",
-            //                 colorsList: widget.leafsColorsList),
-            //             ListWithColouredCircles(
-            //                 lettersCount: lettersCount,
-            //                 title: "Skuju krāsa",
-            //                 colorsList: widget.needlesColorsList),
-            //             ListWithColouredCircles(
-            //                 lettersCount: lettersCount,
-            //                 title: "Augļu krāsa",
-            //                 colorsList: widget.fruitsColorsList),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            //   Container(
-            //     child: FutureBuilder(
-            //       future: fetchData(),
-            //       builder: (context, snapshot) {
-            //         if (snapshot.hasData) {
-            //           List<Translation> wordsList = snapshot.data;
-
-            //           return wordsList.length == 0
-            //               ? Container(
-            //                   height: MediaQuery.of(context).size.height * 0.3,
-            //                   child: Column(
-            //                     mainAxisAlignment: MainAxisAlignment.end,
-            //                     children: [
-            //                       Text(
-            //                         "Netika atrasts neviens rezultāts pēc Jūsu izvēlētajiem filtriem",
-            //                         textAlign: TextAlign.center,
-            //                         style: TextStyle(
-            //                           color: Colors.white,
-            //                           fontSize: 25,
-            //                           fontWeight: FontWeight.bold,
-            //                         ),
-            //                       ),
-            //                       Padding(
-            //                         padding: const EdgeInsets.only(top: 10),
-            //                         child: FlatButton(
-            //                           height: 45,
-            //                           child: Text(
-            //                             'Atgriezties',
-            //                             style: TextStyle(
-            //                               fontSize: 20,
-            //                               color: Color(0xFFC2BE66),
-            //                             ),
-            //                           ),
-            //                           color: Colors.white,
-            //                           shape: RoundedRectangleBorder(
-            //                               borderRadius:
-            //                                   BorderRadius.circular(8.0),
-            //                               side: BorderSide(
-            //                                   color: Colors.white, width: 2)),
-            //                           onPressed: () {
-            //                             Navigator.pop(context);
-            //                           },
-            //                         ),
-            //                       )
-            //                     ],
-            //                   ),
-            //                 )
-            //               : Column(
-            //                   children: wordsList
-            //                       .map(
-            //                         (e) => Padding(
-            //                           padding:
-            //                               const EdgeInsets.only(bottom: 10),
-            //                           child: Container(
-            //                             padding: EdgeInsets.symmetric(
-            //                                 horizontal: 10, vertical: 7),
-            //                             decoration: BoxDecoration(
-            //                               border: Border.all(
-            //                                   color: kDefaultColor, width: 1.5),
-            //                               borderRadius:
-            //                                   BorderRadius.circular(10),
-            //                             ),
-            //                             child: Row(
-            //                               mainAxisAlignment:
-            //                                   MainAxisAlignment.spaceBetween,
-            //                               children: [
-            //                                 GestureDetector(
-            //                                   onTap: () {
-            //                                     Navigator.of(context).push(
-            //                                       MaterialPageRoute(
-            //                                         builder: (context) =>
-            //                                             SingleTranslationScreen(
-            //                                                 e.id),
-            //                                       ),
-            //                                     );
-            //                                   },
-            //                                   child: Container(
-            //                                     //width is needed if you have icon at right side
-            //                                     width: MediaQuery.of(context)
-            //                                             .size
-            //                                             .width -
-            //                                         100,
-            //                                     child: Text(
-            //                                       '${e.lv}',
-            //                                       style: TextStyle(
-            //                                         fontSize: 24,
-            //                                         fontWeight: FontWeight.w600,
-            //                                         color: kDefaultColor,
-            //                                       ),
-            //                                     ),
-            //                                   ),
-            //                                 ),
-            //                                 Icon(
-            //                                   Icons.launch_outlined,
-            //                                   color: kDefaultColor,
-            //                                 ),
-            //                               ],
-            //                             ),
-            //                           ),
-            //                         ),
-            //                       )
-            //                       .toList(),
-            //                 );
-            //         } else {
-            //           return CircularProgressIndicator();
-            //         }
-            //       },
-            //     ),
-            //   ),
-            // ],
           ),
         ),
       ),
@@ -514,7 +297,7 @@ class ListWithText extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: Container(
-                            width: lettersCount * 10.0,
+                            width: lettersCount * 12.0,
                             decoration: BoxDecoration(
                               gradient: kDefaultLinearGradient,
                               borderRadius: BorderRadius.only(

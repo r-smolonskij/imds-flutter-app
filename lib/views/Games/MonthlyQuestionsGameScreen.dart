@@ -6,6 +6,7 @@ import 'package:flutterTestApp/components/Loader.dart';
 import 'package:flutterTestApp/components/RegularCustomButton.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/views/Games/GamesListScreen.dart';
 
 class MonthlyQuestionsGameScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _MonthlyQuestionsGameScreenState
     var foundPlantGame = monthsPlantGame.firstWhere(
         (game) => game["monthId"] == widget.monthId,
         orElse: () => null);
-    var object = foundPlantGame["lv"] as Map<String, dynamic>;
+    var object = foundPlantGame[widget.language] as Map<String, dynamic>;
     if (foundPlantGame != null) {
       setState(() {
         gameItem = object;
@@ -200,7 +201,7 @@ class _MonthlyQuestionsGameScreenState
                     padding: const EdgeInsets.only(top: 20, bottom: 10),
                     child: RegularCustomButton(
                       onPress: () => onAnswerSubmit(),
-                      text: "Iesniegt atbildi",
+                      text: getTranslation(context, "submit_answer"),
                       backgroundColor:
                           selectedAnswer != null ? kDefaultColor : Colors.grey,
                       borderWidth: 0,
@@ -214,7 +215,7 @@ class _MonthlyQuestionsGameScreenState
                   ),
                   RegularCustomButton(
                     onPress: () => goToNextQuestion(),
-                    text: "Izlaist",
+                    text: getTranslation(context, "skip"),
                     backgroundColor: Colors.red,
                     borderWidth: 0,
                     textStyle: TextStyle(
