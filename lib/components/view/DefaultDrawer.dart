@@ -70,7 +70,7 @@ class DefaultDrawer extends StatelessWidget {
             navigateTo: UsedSourcesScreen(),
           ),
           CustomListTile(
-            title: "Interactive Photos",
+            title: getTranslation(context, "photos"),
             iconName: Icons.photo,
             navigateTo: InteractivePhotosListScreen(),
           ),

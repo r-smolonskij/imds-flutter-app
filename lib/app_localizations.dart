@@ -33,6 +33,17 @@ class AppLocalizations {
   String translate(String key) {
     return _localizedStrings[key];
   }
+
+  Future<String> translateByLanguageCode(
+      String translationCode, String languageCode) async {
+    String jsonString =
+        await rootBundle.loadString('assets/lang/${languageCode}.json');
+    Map<String, dynamic> jsonMap = json.decode(jsonString);
+    var translations = jsonMap.map((key, value) {
+      return MapEntry(key, value.toString());
+    });
+    return translations[translationCode];
+  }
 }
 
 class _AppLocalizationsDelegate

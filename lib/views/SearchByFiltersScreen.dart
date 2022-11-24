@@ -72,7 +72,6 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
           } else if (part == "needles") {
             allNeedlesColorsList = colorsList;
           }
-          print(colorsList);
         });
       });
       await Future.delayed(const Duration(milliseconds: 50));
@@ -282,7 +281,8 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
                 // return SizedBox();
                 return ColorSelectionItem(
                   color: color["hexCode"],
-                  colorTitle: color["color_lv"],
+                  colorTitle:
+                      getTranslation(context, color["color_translation"]),
                   isSelected: isColorSelected(type, color["id"]),
                   onSelection: () => onColorClick(type, color["id"]),
                 );
@@ -321,7 +321,7 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
               (group) {
                 return SelectionItem(
                   id: group.id,
-                  title: group.text,
+                  title: getTranslation(context, group.text),
                   imagePath: group.imageName,
                   onPress: () => changeSelectedType(group.id),
                   isSelected: group.id == selectedTypeId,
@@ -352,7 +352,7 @@ class _SearchByFiltersScreenState extends State<SearchByFiltersScreen> {
               ],
             ),
             Text(
-              "Ziedēšanas laiks",
+              getTranslation(context, "flowering_time"),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: 10),

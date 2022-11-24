@@ -31,7 +31,7 @@ class _InteractivePhotosListScreenState
     }
 
     return DefaultView(
-      title: getTranslation(context, "interactive_photos"),
+      title: getTranslation(context, "photos"),
       child: Column(
         children: [
           Padding(
@@ -40,7 +40,7 @@ class _InteractivePhotosListScreenState
               children: [
                 SingleImage(
                   imageTitle: "augs_icon.png",
-                  title: "Auga uzbūve",
+                  title: getTranslation(context, "plant_structure"),
                   originalImageTitle: "augs.png",
                   pinsList: [
                     [319, 76, 1],
@@ -53,7 +53,7 @@ class _InteractivePhotosListScreenState
                 ),
                 SingleImage(
                   imageTitle: "zieds_icon.png",
-                  title: "Zieda uzbūve",
+                  title: getTranslation(context, "flower_structure"),
                   originalImageTitle: "zieds.png",
                   pinsList: [
                     //Left Side
@@ -77,7 +77,7 @@ class _InteractivePhotosListScreenState
                 ),
                 SingleImage(
                   imageTitle: "sakne_icon.png",
-                  title: "Saknes uzbūve",
+                  title: getTranslation(context, "root_structure"),
                   originalImageTitle: "sakne.png",
                   pinsList: [
                     [1200, 326, 1],
@@ -88,7 +88,7 @@ class _InteractivePhotosListScreenState
                 ),
                 SingleImage(
                   imageTitle: "pupinja_icon.png",
-                  title: "Sēklas uzbūve",
+                  title: getTranslation(context, "seed_structure"),
                   originalImageTitle: "pupinja.png",
                   pinsList: [
                     [1124, 234, 1],
@@ -100,7 +100,7 @@ class _InteractivePhotosListScreenState
                 ),
                 SingleImage(
                   imageTitle: "cerinju_lapa_icon.png",
-                  title: "Vienkāršas lapas uzbūve",
+                  title: getTranslation(context, "simple_leaf_structure"),
                   originalImageTitle: "cerinju_lapa.png",
                   pinsList: [
                     [1123, 43, 1],
@@ -112,7 +112,7 @@ class _InteractivePhotosListScreenState
                 ),
                 SingleImage(
                   imageTitle: "lapa_salikta_icon.png",
-                  title: "Saliktas lapas uzbūve",
+                  title: getTranslation(context, "composite_leaf_structure"),
                   originalImageTitle: "lapa_salikta.png",
                   pinsList: [
                     [520, 269, 1],
@@ -121,7 +121,7 @@ class _InteractivePhotosListScreenState
                 ),
                 SingleImage(
                   imageTitle: "Ziedkopas_main.png",
-                  title: "Ziedkopas",
+                  title: getTranslation(context, "inflorescences"),
                   originalImageTitle: "Ziedkopas_main.png",
                   onPress: () => {
                     Navigator.push(

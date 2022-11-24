@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutterTestApp/db/globals.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/app_localizations.dart';
@@ -124,7 +125,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Netika atrasts neviens termins pēc Jūsu ievadītā teksta",
+                      getTranslation(context, "no_results_found_by_filters"),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -137,7 +138,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       child: FlatButton(
                         height: 45,
                         child: Text(
-                          'Atjaunot meklēšanas lauku',
+                          getTranslation(context, "clear_search_field"),
                           style: TextStyle(
                             fontSize: 20,
                             color: Color(0xFFC2BE66),

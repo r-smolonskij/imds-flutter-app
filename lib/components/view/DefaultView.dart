@@ -1,35 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterTestApp/components/LanguageChooseModal.dart';
 import 'package:flutterTestApp/components/view/DefaultDrawer.dart';
 import 'package:flutterTestApp/components/view/SecondDrawer.dart';
 import 'package:flutterTestApp/constants.dart';
-import 'package:flutterTestApp/views/LoginScreen.dart';
 
 class DefaultView extends StatefulWidget {
   const DefaultView(
-      {Key key, this.title, this.child, this.bottomNavigationBar, this.goBack})
+      {Key key,
+      this.title,
+      this.child,
+      this.bottomNavigationBar,
+      this.goBack,
+      this.backgroundColor,
+      this.haveLandscapeMode})
       : super(key: key);
 
   final String title;
   final Widget child;
   final Widget bottomNavigationBar;
-  final bool goBack;
+  final bool goBack, haveLandscapeMode;
+  final Color backgroundColor;
 
   @override
   _DefaultViewState createState() => _DefaultViewState();
 }
 
 class _DefaultViewState extends State<DefaultView> {
-  
-  hideKeyboard(){
-    print(11);
+  hideKeyboard() {
     FocusScope.of(context).requestFocus(new FocusNode());
   }
+
+  void initState() {
+    super.initState();
+    if (widget.haveLandscapeMode != null && widget.haveLandscapeMode) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft,
+      ]);
+    } else {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => hideKeyboard(),
-        child: Container(
+      onTap: () => hideKeyboard(),
+      child: Container(
         decoration: BoxDecoration(
           gradient: kDefaultLinearGradient,
         ),
@@ -66,7 +89,8 @@ class _DefaultViewState extends State<DefaultView> {
                           onTap: () {
                             return showDialog<void>(
                               context: context,
-                              barrierDismissible: false, // user must tap button!
+                              barrierDismissible:
+                                  false, // user must tap button!
                               builder: (BuildContext context) {
                                 return LanguageChooseModal();
                               },
@@ -77,30 +101,11 @@ class _DefaultViewState extends State<DefaultView> {
                             child: Icon(
                               Icons.language,
                               size: MediaQuery.of(context).size.height > 400
-                                  ? MediaQuery.of(context).size.height * 0.035
-                                  : 32,
+                                  ? MediaQuery.of(context).size.height * 0.040
+                                  : 36,
                             ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
-                            child: Icon(
-                              Icons.login,
-                              size: MediaQuery.of(context).size.height > 400
-                                  ? MediaQuery.of(context).size.height * 0.035
-                                  : 32,
-                            ),
-                          ),
-                        ),
+                        )
                       ],
                     );
                   },
@@ -115,10 +120,15 @@ class _DefaultViewState extends State<DefaultView> {
               constraints:
                   BoxConstraints(minHeight: MediaQuery.of(context).size.height),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/background.png"),
-                  fit: BoxFit.cover,
-                ),
+                color: widget.backgroundColor != null
+                    ? widget.backgroundColor
+                    : null,
+                image: widget.backgroundColor == null
+                    ? DecorationImage(
+                        image: AssetImage("assets/images/background.png"),
+                        fit: BoxFit.cover,
+                      )
+                    : null,
               ),
               child: SingleChildScrollView(
                 child: Column(
@@ -151,13 +161,13 @@ class _DefaultViewState extends State<DefaultView> {
                                   .copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height > 400
-                                              ? MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.035
-                                              : 24),
+                                      fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height >
+                                              400
+                                          ? MediaQuery.of(context).size.height *
+                                              0.035
+                                          : 24),
                             ),
                           ),
                         ],

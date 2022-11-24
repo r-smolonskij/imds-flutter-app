@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/components/SingleTranslation/PiktoIcon.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/translation.dart';
 import 'package:flutterTestApp/constants.dart';
 import 'package:collection/collection.dart';
@@ -34,7 +35,7 @@ class SimpleInfoBox extends StatelessWidget {
               child: Row(
                 children: [
                   Tooltip(
-                      message: foundGroup.text,
+                      message: getTranslation(context, foundGroup.text),
                       child: PiktoIcon(
                         imagePath: foundGroup.imageName,
                       ))

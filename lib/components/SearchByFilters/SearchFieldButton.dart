@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 
 class SearchFieldButton extends StatefulWidget {
   const SearchFieldButton(
@@ -68,7 +69,7 @@ class _SearchFieldButtonState extends State<SearchFieldButton> {
                     ),
                     selectedType != null
                         ? Text(
-                            selectedType.text,
+                            getTranslation(context, selectedType.text),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),

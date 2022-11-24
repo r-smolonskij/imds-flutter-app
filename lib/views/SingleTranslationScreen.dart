@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterTestApp/components/SingleTranslation/ImageDialog.dart';
 import 'package:flutterTestApp/components/SingleTranslation/InternetSource.dart';
 import 'package:flutterTestApp/components/SingleTranslation/PlantBodyPartColorsList.dart';
@@ -105,7 +106,9 @@ class _SingleTranslationScreenState extends State<SingleTranslationScreen> {
                                     children: [
                                       SimpleInfoBox(
                                           translation: translations[0]),
-                                      ImageDialog(),
+                                      ImageDialog(
+                                        imageName: translations[0].la,
+                                      ),
                                     ],
                                   ),
                                   TranslationListItem(

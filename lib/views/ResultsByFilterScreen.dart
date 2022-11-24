@@ -138,7 +138,7 @@ class _ResultsByFilterScreenState extends State<ResultsByFilterScreen> {
                           ListWithText(
                             lettersCount: lettersCount,
                             title: getTranslation(context, "plant_type"),
-                            text: typeText,
+                            text: getTranslation(context, typeText),
                           ),
                           ListWithText(
                               lettersCount: lettersCount,
@@ -174,7 +174,8 @@ class _ResultsByFilterScreenState extends State<ResultsByFilterScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                "Netika atrasts neviens rezultāts pēc Jūsu izvēlētajiem filtriem",
+                                getTranslation(
+                                    context, "no_results_found_by_filters"),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.white,
@@ -187,7 +188,7 @@ class _ResultsByFilterScreenState extends State<ResultsByFilterScreen> {
                                 child: FlatButton(
                                   height: 45,
                                   child: Text(
-                                    'Atgriezties',
+                                    getTranslation(context, "return"),
                                     style: TextStyle(
                                       fontSize: 20,
                                       color: Color(0xFFC2BE66),

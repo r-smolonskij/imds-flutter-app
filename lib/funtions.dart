@@ -46,7 +46,7 @@ showAlertDialog(context, text) {
               height: 30,
               child: Center(
                 child: Text(
-                  "Atgriezties",
+                  getTranslation(context, "return"),
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -63,4 +63,10 @@ showAlertDialog(context, text) {
 
 getTranslation(context, codeName) {
   return AppLocalizations.of(context).translate(codeName).toString();
+}
+
+getTranslationByLanguage(context, codeName, languageCode) async {
+  var result = await AppLocalizations.of(context)
+      .translateByLanguageCode(codeName, languageCode);
+  return result;
 }

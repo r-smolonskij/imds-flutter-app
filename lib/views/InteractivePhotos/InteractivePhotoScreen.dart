@@ -28,6 +28,7 @@ class InteractivePhotoScreen extends StatelessWidget {
 
     return DefaultView(
       title: title != null ? title : "",
+      backgroundColor: imagesBackgroundColor,
       goBack: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

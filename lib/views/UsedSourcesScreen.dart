@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
+import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 import 'dart:async';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +15,6 @@ class UsedSourcesScreen extends StatefulWidget {
 class _UsedSourcesScreenState extends State<UsedSourcesScreen> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return DefaultView(
       title: AppLocalizations.of(context).translate("used_sources").toString(),
       child: Container(
@@ -21,93 +22,15 @@ class _UsedSourcesScreenState extends State<UsedSourcesScreen> {
         child: Column(
           children: [
             SourceList(
-              listTitle: AppLocalizations.of(context)
-                  .translate("used_sources")
-                  .toString(),
-              sourcesList: [
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu4"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu4"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu4"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
-                ],
-                [
-                  "Aizpure 2000",
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu4"
-                ]
-              ],
+              listTitle: getTranslation(context, "used_sources"),
+              sourcesList: sourcesList,
             ),
             SourceList(
               titleWidth: 30,
               authorWidth: 80,
-              listTitle: AppLocalizations.of(context)
-                  .translate("used_sources_from_net")
-                  .toString(),
-              sourcesList: [
-                [
-                  "Aizpure 2000",
-                  "https://www.facebook.com/",
-                  "https://www.facebook.com/"
-                ],
-                [
-                  "Aizpure 2000",
-                  "https://www.facebook.com/",
-                  "https://www.facebook.com/"
-                ],
-                [
-                  "Aizpure 2000",
-                  "https://www.facebook.com/",
-                  "https://www.facebook.com/"
-                ],
-                [
-                  "Aizpure 2000",
-                  "https://www.facebook.com/",
-                  "https://www.facebook.com/"
-                ],
-                [
-                  "Aizpure 2000",
-                  "https://www.facebook.com/",
-                  "https://www.facebook.com/"
-                ],
-              ],
+              listTitle: getTranslation(context, "used_sources_from_net"),
+              sourcesList: internetSourcesList,
+              isUrlLink: true,
             ),
           ],
         ),
@@ -145,7 +68,7 @@ class _SourceItemState extends State<SourceItem> {
         headers: <String, String>{'my_header_key': 'my_header_value'},
       );
     } else {
-      throw 'Could not launch $url';
+      // throw 'Could not launch $url';
     }
   }
 
@@ -203,16 +126,18 @@ class _SourceItemState extends State<SourceItem> {
 }
 
 class SourceList extends StatelessWidget {
-  const SourceList({
-    Key key,
-    this.listTitle,
-    this.sourcesList,
-    this.titleWidth,
-    this.authorWidth,
-  }) : super(key: key);
+  const SourceList(
+      {Key key,
+      this.listTitle,
+      this.sourcesList,
+      this.titleWidth,
+      this.authorWidth,
+      this.isUrlLink})
+      : super(key: key);
   final String listTitle;
   final List sourcesList;
   final int titleWidth, authorWidth;
+  final bool isUrlLink;
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +156,8 @@ class SourceList extends StatelessWidget {
           SourceItem(
             sourceTitle: item[0].toString(),
             sourceAuthor: item[1].toString(),
-            sourceUrl: item.length > 2 ? item[2].toString() : null,
+            sourceUrl:
+                isUrlLink != null && isUrlLink ? item[1].toString() : null,
             titleWidth: titleWidth != null ? titleWidth : null,
             authorWidth: authorWidth != null ? authorWidth : null,
           )

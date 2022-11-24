@@ -37,41 +37,21 @@ class _PublicationsScreenState extends State<PublicationsScreen> {
             PublicationsList(
               publicationsList: [
                 [
-                  "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambl",
+                  "Sviķe, S., 2018. A New Dictionary of Botanical Terms: Data Analysis of a Lexicographic Survey. Economics World. New York: David Publishing Company Journal. May-June 2018, 6 (3). 228–241.",
                   [
-                    "https://www.lipsum.com/",
-                    "http://www.lingoes.net/en/translator/langcode.htm"
+                    "http://www.davidpublisher.com/index.php/Home/Article/index?id=35063.html"
                   ]
                 ],
                 [
-                  "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambl",
-                  [
-                    "https://www.lipsum.com/",
-                    "http://www.lingoes.net/en/translator/langcode.htm"
-                  ]
+                  "Sviķe, S., 2017. A New Dictionary of Botanical Terms: an Insight into the Compilation Project of the Dictionary. Jeļena Titko (ed) Emerging Trends in Economics, Culture and Humanities (etECH2017). Conference Proceedings. Rīga: Ekonomikas un kultūras augstskola, 22–30.",
+                  ["https://www.augstskola.lv/upload/Conf_proceedings_2017.pdf"]
                 ],
                 [
-                  "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambl",
+                  "Stalažs, A., 2015. Asteru, miķelīšu, ziemasteru un dažu citu radniecīgo ģinšu sugu latviskie nosaukumi. Scripta Letonica 2(1). Dobele: RPD Science. 24–30.",
                   [
-                    "https://www.lipsum.com/",
-                    "http://www.lingoes.net/en/translator/langcode.htm"
+                    "http://www.rpd-science.org/ScrLet/V002/Scripta_Letonica_2-1_2015_Art_4.pdf",
                   ]
                 ],
-                [
-                  "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambl",
-                  [
-                    "https://www.lipsum.com/",
-                    "http://www.lingoes.net/en/translator/langcode.htm"
-                  ]
-                ]
-                // "Lorem Ipsum is simply dummy text of t",
-                // ["111", "john"],
-
-                //   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-                //     linksList: [
-                //       "https://www.lipsum.com/",
-                //       "http://www.lingoes.net/en/translator/langcode.htm"
-                // },
               ],
             ),
             // FlatButton(onPressed: AppLocalizations., child: Text("Click me"))

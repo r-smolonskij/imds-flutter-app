@@ -48,6 +48,7 @@ flutter:
   assets:
     - assets/images/piktogrammas/
     - assets/images/
+    - assets/images/plant_images/
     - assets/interactive_images/
     - assets/icons/
     - assets/lang/

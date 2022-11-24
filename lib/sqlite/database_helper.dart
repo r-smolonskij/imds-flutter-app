@@ -30,12 +30,12 @@ class DatabaseHelper {
     // Only copy if the database doesn't exist
     //if (FileSystemEntity.typeSync(path) == FileSystemEntityType.notFound){
     // Load database from asset and copy
-    ByteData data = await rootBundle.load(join('assets/db', 'imds.db'));
+    ByteData data = await rootBundle.load(join('assets/db', 'imds_new.db'));
     List<int> bytes =
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     // Save copied asset to documents
     await new File(path).writeAsBytes(bytes);
-    //}
+
     var ourDb = await openDatabase(path);
     return ourDb;
   }
@@ -171,8 +171,8 @@ class DatabaseHelper {
   Future<List<Translation>> getTranslationByLanguageAndSearchText(
       searchText, languageProperty) async {
     var dbClient = await db;
-    print(
-        "SELECT * FROM translations WHERE ${languageProperty} LIKE '%${searchText}%' AND (lv_prio = 1 OR lv_prio IS NULL) AND (ru_prio = 1 OR ru_prio IS NULL) AND (de_prio = 1 OR de_prio IS NULL);");
+    // print(
+    //     "SELECT * FROM translations WHERE ${languageProperty} LIKE '%${searchText}%' AND (lv_prio = 1 OR lv_prio IS NULL) AND (ru_prio = 1 OR ru_prio IS NULL) AND (de_prio = 1 OR de_prio IS NULL);");
     List<Map> translationsMap = await dbClient.rawQuery(
         "SELECT * FROM translations WHERE ${languageProperty} LIKE '%${searchText}%' AND (lv_prio = 1 OR lv_prio IS NULL) AND (ru_prio = 1 OR ru_prio IS NULL) AND (de_prio = 1 OR de_prio IS NULL);");
     List<Translation> translations = [];

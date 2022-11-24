@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterTestApp/app_localizations.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
 import 'package:flutterTestApp/constants.dart';
+import 'package:flutterTestApp/funtions.dart';
 
 class UsedSymbolsScreen extends StatefulWidget {
   @override
@@ -12,7 +14,8 @@ class _UsedSymbolsScreenState extends State<UsedSymbolsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultView(
-      title: AppLocalizations.of(context).translate("used_symbols").toString(),
+      title: getTranslation(context, "used_symbols"),
+      haveLandscapeMode: true,
       child: Container(
         child: Column(
           children: [
@@ -21,7 +24,7 @@ class _UsedSymbolsScreenState extends State<UsedSymbolsScreen> {
               child: Row(children: [
                 Flexible(
                   child: Text(
-                    "To be able to see all table's content please scroll right and down ➡️ ⬆️",
+                    "${getTranslation(context, 'table_scroll_instructions')} ➡️ ⬆️",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -33,76 +36,48 @@ class _UsedSymbolsScreenState extends State<UsedSymbolsScreen> {
               child: CustomTable2(
                 dataRows: [
                   [
-                    1,
-                    2,
-                    AppLocalizations.of(context)
-                        .translate("used_symbols")
-                        .toString()
-                  ]
+                    "f",
+                    "feminium",
+                    "sieviešu dzimte",
+                    "female form",
+                    "Femininum",
+                    "женский род"
+                  ],
+                  [
+                    "m",
+                    "masculinum",
+                    "vīriešu dzimte",
+                    "male form",
+                    "Maskulinum",
+                    "мужской род"
+                  ],
+                  [
+                    "n",
+                    "neutrum",
+                    "nekatra dzimte",
+                    "neutral form",
+                    "Neutrum",
+                    "средний род"
+                  ],
+                  [
+                    "pl",
+                    "pluralis",
+                    "daudzskaitlis",
+                    "plural",
+                    "Plural",
+                    "множественное число"
+                  ],
+                  [
+                    "sg",
+                    "singularis",
+                    "vienskaitlis",
+                    "singular",
+                    "Singular",
+                    "единственное число"
+                  ],
+                  ["/", "vel", "vai", "or", "oder", "или"]
                 ],
               ),
-              // CustomTable(
-              //   headerRow: [
-              //     AppLocalizations.of(context).translate("symbol").toString(),
-              //     AppLocalizations.of(context).translate("latin").toString(),
-              //     AppLocalizations.of(context).locale.toString() == "en_US"
-              //         ? AppLocalizations.of(context)
-              //             .translate("english")
-              //             .toString()
-              //         : AppLocalizations.of(context).locale.toString() ==
-              //                 "lv_LV"
-              //             ? AppLocalizations.of(context)
-              //                 .translate("latvian")
-              //                 .toString()
-              //             : AppLocalizations.of(context).locale.toString() ==
-              //                     "ru_RU"
-              //                 ? AppLocalizations.of(context)
-              //                     .translate("russian")
-              //                     .toString()
-              //                 : AppLocalizations.of(context)
-              //                     .translate("german")
-              //                     .toString()
-              //     // AppLocalizations.of(context).locale.toString() == "EN_en"
-              //     //     ? AppLocalizations.of(context)
-              //     //         .translate("english")
-              //     //         .toString()
-              //     //     : null,
-              //     // AppLocalizations.of(context).translate("latvian").toString(),
-              //     // AppLocalizations.of(context).locale.toString() == "EN_en"
-              //     //     ? AppLocalizations.of(context)
-              //     //         .translate("german")
-              //     //         .toString()
-              //     //     : null,
-              //     // AppLocalizations.of(context).locale.toString() == "EN_en"
-              //     //     ? AppLocalizations.of(context)
-              //     //         .translate("russian")
-              //     //         .toString()
-              //     //     : null
-              //   ],
-              //   dataRows: [
-              //     [1, 2, 2],
-              //     [3, 4, 3],
-              //     [5, 6, 3],
-              //     [1, 2, 2],
-              //     [3, 4, 3],
-              //     [5, 6, 3],
-              //     [1, 2, 2],
-              //     [3, 4, 3],
-              //     [5, 6, 3],
-              //     [1, 2, 2],
-              //     [3, 4, 3],
-              //     [5, 6, 3],
-              //     [1, 2, 2],
-              //     [3, 4, 3],
-              //     [5, 6, 3],
-              //     [1, 2, 2],
-              //     [3, 4, 3],
-              //     [5, 6, 3],
-              //     [1, 2, 2],
-              //     [3, 4, 3],
-              //     [5, 6, 3],
-              //   ],
-              // ),
             ),
           ],
         ),
@@ -124,15 +99,25 @@ class CustomTable2 extends StatelessWidget {
     var outputList = [];
     outputList.length = 1;
     outputList[0] = new List.from([
-      AppLocalizations.of(context).translate("symbol").toString(),
-      AppLocalizations.of(context).translate("latin").toString(),
-      AppLocalizations.of(context).locale.toString() == "en_US"
-          ? AppLocalizations.of(context).translate("english").toString()
-          : AppLocalizations.of(context).locale.toString() == "lv_LV"
-              ? AppLocalizations.of(context).translate("latvian").toString()
-              : AppLocalizations.of(context).locale.toString() == "ru_RU"
-                  ? AppLocalizations.of(context).translate("russian").toString()
-                  : AppLocalizations.of(context).translate("german").toString()
+      getTranslation(context, "symbol"),
+      getTranslation(context, "latin"),
+      getTranslation(context, "latvian"),
+      getTranslation(context, "english"),
+      getTranslation(context, "german"),
+      getTranslation(context, "russian"),
+      // AppLocalizations.of(context).translate("symbol").toString(),
+      // AppLocalizations.of(context).translate("latin").toString(),
+      // AppLocalizations.of(context).translate("latvian").toString(),
+      // AppLocalizations.of(context).translate("english").toString(),
+      // AppLocalizations.of(context).translate("german").toString(),
+      // AppLocalizations.of(context).translate("russian").toString(),
+      // AppLocalizations.of(context).locale.toString() == "en_US"
+      //     ? AppLocalizations.of(context).translate("english").toString()
+      //     : AppLocalizations.of(context).locale.toString() == "lv_LV"
+      //         ? AppLocalizations.of(context).translate("latvian").toString()
+      //         : AppLocalizations.of(context).locale.toString() == "ru_RU"
+      //             ? AppLocalizations.of(context).translate("russian").toString()
+      //             : AppLocalizations.of(context).translate("german").toString()
     ]);
     outputList.addAll(dataRows);
 
@@ -143,7 +128,7 @@ class CustomTable2 extends StatelessWidget {
           0: IntrinsicColumnWidth(),
         },
         defaultColumnWidth:
-            FixedColumnWidth(MediaQuery.of(context).size.width / 3 + 30),
+            FixedColumnWidth(MediaQuery.of(context).size.width / 6),
         border: TableBorder.all(
           color: kDefaultColor,
         ),
@@ -169,7 +154,7 @@ class CustomTable2 extends StatelessWidget {
                                   color: key == 0
                                       ? kSecondaryColor
                                       : kDefaultColor,
-                                  fontSize: key == 0 ? 24 : 22,
+                                  fontSize: key == 0 ? 16 : 14,
                                   fontWeight: key == 0
                                       ? FontWeight.bold
                                       : FontWeight.w500,
