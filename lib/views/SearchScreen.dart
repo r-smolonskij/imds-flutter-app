@@ -221,9 +221,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppLocalizations.of(context)
-                              .translate("enter_3_symbols")
-                              .toString(),
+                          getTranslation(context, "enter_3_symbols"),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 30,

@@ -97,5 +97,6 @@
     "seed_structure":"Sēklas uzbūve",
     "simple_leaf_structure":"Vienkāršas lapas uzbūve",
     "composite_leaf_structure":"Saliktas lapas uzbūve",
-    "inflorescences":"Ziedkopas"
+    "inflorescences":"Ziedkopas",
+    "semantic_search": "Semantiskā meklēšana"
 }

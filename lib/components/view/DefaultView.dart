@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterTestApp/components/LanguageChooseModal.dart';
+import 'package:flutterTestApp/components/view/CustomAppBar.dart';
 import 'package:flutterTestApp/components/view/DefaultDrawer.dart';
-import 'package:flutterTestApp/components/view/SecondDrawer.dart';
 import 'package:flutterTestApp/constants.dart';
 
 class DefaultView extends StatefulWidget {
@@ -58,62 +58,9 @@ class _DefaultViewState extends State<DefaultView> {
         ),
         child: SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              flexibleSpace: Container(
-                decoration: BoxDecoration(gradient: kDefaultLinearGradient),
-              ),
-              leading: Builder(
-                builder: (context) {
-                  return IconButton(
-                    icon: Icon(
-                      widget.goBack == true ? Icons.arrow_back : Icons.widgets,
-                      size: MediaQuery.of(context).size.height > 400
-                          ? MediaQuery.of(context).size.height * 0.035
-                          : 32,
-                    ),
-                    onPressed: () {
-                      widget.goBack == true
-                          ? Navigator.pop(context)
-                          : Scaffold.of(context).openDrawer();
-                    },
-                  );
-                },
-              ),
-              actions: [
-                Builder(
-                  builder: (context) {
-                    return Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            return showDialog<void>(
-                              context: context,
-                              barrierDismissible:
-                                  false, // user must tap button!
-                              builder: (BuildContext context) {
-                                return LanguageChooseModal();
-                              },
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
-                            child: Icon(
-                              Icons.language,
-                              size: MediaQuery.of(context).size.height > 400
-                                  ? MediaQuery.of(context).size.height * 0.040
-                                  : 36,
-                            ),
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                )
-              ],
-            ),
+            appBar: CustomAppBar(goBack: widget.goBack),
             drawer: DefaultDrawer(),
-            endDrawer: SecondDrawer(),
+            // endDrawer: SecondDrawer(),
             body: Container(
               height: MediaQuery.of(context).size.height -
                   AppBar().preferredSize.height,

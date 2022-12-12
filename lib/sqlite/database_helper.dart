@@ -157,6 +157,33 @@ class DatabaseHelper {
     return translationsList;
   }
 
+  Future<List<Translation>> getSemanticSearchTranslations(searchText) async {
+    var dbClient = await db;
+    List<Translation> translations = [];
+    List<Map> translationsMap = await dbClient.rawQuery(
+        "SELECT * FROM translations WHERE la LIKE '%${searchText}%' AND root IS NOT NULL AND (lv_prio = 1 OR lv_prio IS NULL) AND (ru_prio = 1 OR ru_prio IS NULL) AND (de_prio = 1 OR de_prio IS NULL);;");
+    if (translationsMap.length > 0) {
+      for (int i = 0; i < translationsMap.length; i++) {
+        translations.add(Translation.fromMap(translationsMap[i]));
+      }
+    }
+    return translations;
+  }
+
+  Future<List<Translation>> getSemanticTranslationsByParentLatinName(
+      parentLatinName) async {
+    var dbClient = await db;
+    List<Translation> translations = [];
+    List<Map> translationsMap = await dbClient.rawQuery(
+        "SELECT * FROM translations WHERE root = '${parentLatinName}';");
+    if (translationsMap.length > 0) {
+      for (int i = 0; i < translationsMap.length; i++) {
+        translations.add(Translation.fromMap(translationsMap[i]));
+      }
+    }
+    return translations;
+  }
+
   Future<Translation> getTranslationById(translationId) async {
     var dbClient = await db;
     var translationItem;
@@ -166,6 +193,17 @@ class DatabaseHelper {
       translationItem = Translation.fromMap(translationsMap[0]);
     }
     return translationItem;
+  }
+
+  Future<Translation> getTranslationByLatinName(latinName) async {
+    var dbClient = await db;
+    List<Map> translationsMap = await dbClient.rawQuery(
+        "SELECT * FROM translations WHERE la = '${latinName}' AND (lv_prio = 1 OR lv_prio IS NULL) AND (ru_prio = 1 OR ru_prio IS NULL) AND (de_prio = 1 OR de_prio IS NULL) LIMIT 1;");
+    Translation translation;
+    if (translationsMap.length > 0) {
+      translation = Translation.fromMap(translationsMap[0]);
+    }
+    return translation;
   }
 
   Future<List<Translation>> getTranslationByLanguageAndSearchText(

@@ -43,12 +43,12 @@ class _InteractivePhotosListScreenState
                   title: getTranslation(context, "plant_structure"),
                   originalImageTitle: "augs.png",
                   pinsList: [
-                    [319, 76, 1],
-                    [319, 184, 2],
-                    [319, 264, 3],
-                    [319, 365, 4],
-                    [319, 421, 5],
-                    [319, 575, 6],
+                    [319, 76, 858],
+                    [319, 184, 859],
+                    [319, 264, 861],
+                    [319, 365, 862],
+                    [319, 421, 860],
+                    [319, 575, 863],
                   ],
                 ),
                 SingleImage(
@@ -57,22 +57,22 @@ class _InteractivePhotosListScreenState
                   originalImageTitle: "zieds.png",
                   pinsList: [
                     //Left Side
-                    [47, 297, 1],
-                    [45, 123, 1],
-                    [17, 215, 1],
+                    [47, 297, 847],
+                    [45, 123, 848],
+                    [17, 215, 849],
                     //TopLeft
-                    [84, 78, 1],
-                    [162, 72, 1],
-                    [121, 32, 1],
+                    [84, 78, 851],
+                    [162, 72, 852],
+                    [121, 32, 850],
                     //Right
-                    [415, 54, 1],
-                    [410, 101, 1],
-                    [419, 220, 1],
-                    [412, 270, 1],
-                    [455, 157, 1],
+                    [415, 54, 854],
+                    [410, 101, 855],
+                    [419, 220, 856],
+                    [412, 270, 857],
+                    [455, 157, 853],
                     //Bottom
-                    [287, 315, 1],
-                    [287, 383, 1],
+                    [287, 315, 846],
+                    [287, 383, 845],
                   ],
                 ),
                 SingleImage(
@@ -80,10 +80,10 @@ class _InteractivePhotosListScreenState
                   title: getTranslation(context, "root_structure"),
                   originalImageTitle: "sakne.png",
                   pinsList: [
-                    [1200, 326, 1],
-                    [1200, 398, 1],
-                    [1200, 713, 1],
-                    [1200, 1206, 1],
+                    [1200, 326, 896],
+                    [1200, 398, 895],
+                    [1200, 713, 897],
+                    [1200, 1206, 898],
                   ],
                 ),
                 SingleImage(
@@ -91,11 +91,11 @@ class _InteractivePhotosListScreenState
                   title: getTranslation(context, "seed_structure"),
                   originalImageTitle: "pupinja.png",
                   pinsList: [
-                    [1124, 234, 1],
-                    [1124, 319, 1],
-                    [1124, 454, 1],
+                    [1124, 234, 884],
+                    [1124, 319, 886],
+                    [1124, 454, 885],
                     [1124, 769, 1],
-                    [1124, 982, 1],
+                    [1124, 982, 888],
                   ],
                 ),
                 SingleImage(
@@ -103,11 +103,11 @@ class _InteractivePhotosListScreenState
                   title: getTranslation(context, "simple_leaf_structure"),
                   originalImageTitle: "cerinju_lapa.png",
                   pinsList: [
-                    [1123, 43, 1],
-                    [1123, 349, 1],
-                    [1123, 591, 1],
-                    [1123, 707, 1],
-                    [1123, 1227, 1],
+                    [1123, 43, 889],
+                    [1123, 349, 890],
+                    [1123, 591, 891],
+                    [1123, 707, 892],
+                    [1123, 1227, 893],
                   ],
                 ),
                 SingleImage(
@@ -115,8 +115,8 @@ class _InteractivePhotosListScreenState
                   title: getTranslation(context, "composite_leaf_structure"),
                   originalImageTitle: "lapa_salikta.png",
                   pinsList: [
-                    [520, 269, 1],
-                    [520, 514, 1]
+                    [520, 269, 894],
+                    [520, 514, 893]
                   ],
                 ),
                 SingleImage(
@@ -135,7 +135,6 @@ class _InteractivePhotosListScreenState
               ],
             ),
           )
-          // FlatButton(onPressed: AppLocalizations., child: Text("Click me"))
         ],
       ),
     );

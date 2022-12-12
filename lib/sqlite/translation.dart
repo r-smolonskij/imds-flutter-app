@@ -21,6 +21,7 @@ class Translation {
   String plant_width;
   String plant_group;
   String plant_subgroup;
+  String root;
 
   Translation(
       this.id,
@@ -43,7 +44,8 @@ class Translation {
       this.foliage_height,
       this.plant_width,
       this.plant_group,
-      this.plant_subgroup);
+      this.plant_subgroup,
+      this.root);
 
   Translation.fromMap(Map<String, dynamic> map) {
     id = map['id'];
@@ -68,6 +70,7 @@ class Translation {
     plant_width = map['plant_width'].toString();
     plant_group = map['plant_group'];
     plant_subgroup = map['plant_subgroup'];
+    root = map['root'];
   }
 
   Map toJson() => {
@@ -91,6 +94,7 @@ class Translation {
         "foliage_height": foliage_height,
         "plant_width": plant_width,
         "plant_group": plant_group,
-        "plant_subgroup": plant_subgroup
+        "plant_subgroup": plant_subgroup,
+        "root": root
       };
 }

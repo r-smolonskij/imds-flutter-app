@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutterTestApp/components/ExpansionItem.dart';
 import 'package:flutterTestApp/components/SingleTranslation/ImageDialog.dart';
 import 'package:flutterTestApp/components/SingleTranslation/InternetSource.dart';
 import 'package:flutterTestApp/components/SingleTranslation/PlantBodyPartColorsList.dart';
 import 'package:flutterTestApp/components/SingleTranslation/SimpleInfoBox.dart';
 import 'package:flutterTestApp/components/SingleTranslation/TranslationListItem.dart';
 import 'package:flutterTestApp/components/view/DefaultView.dart';
-import 'package:flutterTestApp/constants.dart';
 import 'package:flutterTestApp/funtions.dart';
 import 'package:flutterTestApp/sqlite/database_helper.dart';
 import 'package:flutterTestApp/sqlite/translation.dart';
@@ -27,6 +26,7 @@ class _SingleTranslationScreenState extends State<SingleTranslationScreen> {
   bool loading = false;
   var shortcutsListText = "";
   List<Translation> translations = [];
+  Translation mainTranslation;
   @override
   void initState() {
     getData();
@@ -53,8 +53,8 @@ class _SingleTranslationScreenState extends State<SingleTranslationScreen> {
           .getTranslationsByTranslationGroup(translation.translation_group)
           .then((translationsList) => {
                 setState(() {
-                  print(translationsList);
                   translations = translationsList;
+                  mainTranslation = translationsList[0];
                 })
               });
     });
@@ -105,9 +105,9 @@ class _SingleTranslationScreenState extends State<SingleTranslationScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       SimpleInfoBox(
-                                          translation: translations[0]),
+                                          translation: mainTranslation),
                                       ImageDialog(
-                                        imageName: translations[0].la,
+                                        imageName: mainTranslation.la,
                                       ),
                                     ],
                                   ),
@@ -132,24 +132,31 @@ class _SingleTranslationScreenState extends State<SingleTranslationScreen> {
                                       alignment: WrapAlignment.start,
                                       children: [
                                         PlantBodyPartColorsList(
-                                            translationID: translations[0].id,
+                                            translationID: mainTranslation.id,
                                             type: "flower"),
                                         PlantBodyPartColorsList(
-                                            translationID: translations[0].id,
+                                            translationID: mainTranslation.id,
                                             type: "foliage"),
                                         PlantBodyPartColorsList(
-                                            translationID: translations[0].id,
+                                            translationID: mainTranslation.id,
                                             type: "fruit")
                                       ],
                                     ),
                                   ),
+                                  ExpansionItem(
+                                    title: "TEZAURS",
+                                    description:
+                                        mainTranslation.tezaurs_definition,
+                                    url: mainTranslation.tezaurs_url,
+                                    urlMask: "TEZAURS URL",
+                                  ),
                                   InternetSource(
                                     sourceTitle: "WIKI",
-                                    sourceUrl: translations[0].image_url,
+                                    sourceUrl: mainTranslation.image_url,
                                   ),
                                   InternetSource(
                                     sourceTitle: "TEZAURS",
-                                    sourceUrl: translations[0].tezaurs_url,
+                                    sourceUrl: mainTranslation.tezaurs_url,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),

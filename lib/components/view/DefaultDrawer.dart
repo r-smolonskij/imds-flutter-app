@@ -10,6 +10,7 @@ import 'package:flutterTestApp/views/InteractivePhotos/InteractivePhotosListScre
 import 'package:flutterTestApp/views/PublicationsScreen.dart';
 import 'package:flutterTestApp/views/SearchByFiltersScreen.dart';
 import 'package:flutterTestApp/views/SearchScreen.dart';
+import 'package:flutterTestApp/views/SemanticSearch/SemanticSearchScreen.dart';
 import 'package:flutterTestApp/views/TipsScreen.dart';
 import 'package:flutterTestApp/views/UsedSourcesScreen.dart';
 import 'package:flutterTestApp/views/UsedSymbolsScreen.dart';
@@ -38,6 +39,11 @@ class DefaultDrawer extends StatelessWidget {
             title: getTranslation(context, "search_by_filters"),
             iconName: Icons.person_search_outlined,
             navigateTo: SearchByFiltersScreen(),
+          ),
+          CustomListTile(
+            title: getTranslation(context, "semantic_search"),
+            iconName: Icons.account_tree_outlined,
+            navigateTo: SemanticSearchScreen(),
           ),
           CustomListTile(
             title: getTranslation(context, "educational_games"),

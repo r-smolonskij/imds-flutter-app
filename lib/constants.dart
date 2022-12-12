@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 
 const imagesBackgroundColor = Color(0xFFf0ec74);
 
+var colorsByGroupType = {
+  "ģints": Colors.green,
+  "apakšģints": Colors.yellow,
+  "suga": Colors.blue,
+  "pasuga": Colors.purple,
+  "varietāte": Colors.brown,
+  "forma": Colors.red,
+  "šķirnu grupa": Colors.pink
+};
+
 class Piktogramma {
   String iconPath;
   String title;
@@ -283,56 +293,150 @@ var flagsByCountryCode = {
 const tipsByMonth = [
   {
     "monthId": 1,
-    "tips": ["Janvāris 1", "Janvāris 2", "Janvāris 3", "Janvāris 4"]
+    "tips": [
+      "Ja nevēlaties pavasarī iestrēgt dārza darbu ritenī, jau tagad var uzasināt darbarīkus un pārskatīt dārza inventāru - varbūt kāda lieta jānopērk, bet cita - jāsalabo.",
+      "Ja siltumnīcas jumta slīpums ir nepietiekams (mazāk par 22 grādiem) zem lielas sniega nastas (it īpaši, ja sniegs ir slapjš) var sagāzties pati konstrukcija, tādēļ sniegs no siltumnīcas jumta regulāri jānotīra.",
+      "Regulāri jāseko ražai pagrabā. Parasti tajā mēdz būt par siltu un par mitru. Baidoties no ziemas sala, mēs nereti piemirstam, ka dārzeņi un augļi uzglabāšanas laikā turpina elpot, tātad izdala siltumu un iztvaiko ūdeni. Pagrabs ir jāvēdina un jāpārbauda gaisa temperatūra.",
+      "Mitrs, smags sniegs jānopurina no koku zariem, lai tie nelūztu. Tāpat svarīgi ap jaunu kociņu stumbriem piemīdīt sniegu, lai kavētu iespēju grauzējiem veidot ejas un apgrauzt koku mizu.",
+      "Ja ir mēreni laikapstākļi un rudenī iekavēts - tad var kaļķot augļukokus. Bet šim darbam nav piemērots sala laiks. Darbam var izmantot gatavo maisījumu, ko pārdod dārza preču veikalos.  ",
+      "Ja laika apstākļi ļauj un nav pārāk auksts, ir laiks izzāģēt kokus un izkopt krūmus. Paraugieties, kuri augļukoku zari ir sažuvuši - tie nelokās, bet viegli lūst. Ogulājiem izņem vecākos zarus un tos, kas aug cits citam pāri. ",
+      "Kaut arī ziemā dārzā nav daudz darba, jāseko līdzi laikapstākļu maiņai. Ja ir maz sniega, bet apmēram nedēļu pieturas sals, zeme būs sasalusi apmēram 5 cm dziļumā. Tas kaitē ziemcietēm, graudzālēm, sīpolpuķēm, rozēm, kas ir jutīgākas par citām. Augiem uzber pie mājas stūra vai kaut kur citur saputinātu sniegu vai uzklāj egļu zarus.  ",
+      "Ja sniega ir daudz, tas kaitē skujeņiem. Arī tad, ja tā nav pārāk daudz, bet sniegs ir mitrs un smags, jākrata nost, jo var deformēt augu formu. "
+    ]
   },
   {
     "monthId": 2,
-    "tips": ["Februāris 1", "Februāris 2", "Februāris 3", "Februāris 4"]
+    "tips": [
+      "Februārī pārlūko sēklu krājumus un gādā jaunas. Ja sēklas pērk lielveikalā, jābūt gana zinošam, jo pārdevēja, ar ko konsultēties, līdzās pie stenda nebūs. Toties ir iespēja katru paciņu apskatīt, izpētīt informāciju uz iepakojuma, salīdzināt dažādu firmu piedāvājumu, cenas. Svarīgi ņemt vērā, ka attēlā uz sēklu paciņas retāk norādīta šķirne, biežāk tās piederība kādai grupai (īsie vai garie gurķi, cilindrveida vai apaļās bietes).",
+      "Kam pievērst uzmanību uz sēklu iepakojuma NR.1? Šķirnes raksturojumam - vai tā agrīna, vidēji agrīna, vēlīna; kādas ir ražas īpatnības - garša, augļu/sakņu lielums, ziedu, lapu krāsa.",
+      "Kam pievērst uzmanību uz sēklu iepakojuma NR.2? Audzēšanas un kopšanas nosacījumiem - kad un kādā attālumā, cik dziļi sēklas ieteicams sēt, cik liels būs augu augums, pēc cik ilga laika gaidāma raža. ",
+      "Kam pievērst uzmanību uz sēklu iepakojuma NR.3? Noteikti pārliecinieties par sēklu derīguma termiņu. Jo līdz paciņas atvēršanas pēdējam gadam norādīts ilgāks laiks, jo, protams, labāk. Ir sēklas, kas labu dīgtspēju saglabā arī ilgāk, bet, iegādājoties tādas, kam termiņš beigsies pavisam drīz vai pat pagājis (tāpēc var būt nocenotas), risks ir pircēja ziņā. ",
+      "Kam pievērst uzmanību uz sēklu iepakojuma NR.4? Noderīga ir informācija, kur sēklas audzētas (nevis tikai safasētas paciņās!) un vai to izcelsmes vieta klimatisko apstākļu ziņā ir līdzīga Latvijai.",
+      "Kam pievērst uzmanību uz sēklu iepakojuma NR.5? No vēsākās telpās ziemojušām puķēm, piemēram, fuksijām (Fuchsia spp.), krizantēmām (Chrysanthemum spp.) un pelargonijām (Pelargonium spp.) var griezt spraudeņus. Spraušanu vislabāk veikt mēneša beigās, kad gaismas apstākļi jau ir piemērotāki. ",
+      "Kam pievērst uzmanību uz sēklu iepakojuma NR.6? Sēj puķes ar garu veģetācijas periodu. Tam piemērotas lobēlijas (Lobelia spp.), lauvmutītes (Antirrhinum spp.), verbēnas (Verbena spp.), lefkojas (Matthola incana), petūnijas (Petunia spp.), leduspuķes (Begonia semperflorens) un citas. Ja tās būs tikai pašu priekam, nevis stādu tirgošanai, vēl var paspēt iesēt puķes arī martā, kad būs vairāk saules gaismas.  ",
+    ]
   },
   {
     "monthId": 3,
-    "tips": ["Marts 1", "Marts 2", "Marts 3", "Marts 4"]
+    "tips": [
+      "Sējai gatavi? Labāk būtu vēl nedaudz paciesties: ja sēklas sēj 10. martā, tās sadīgs ap 15.-17. martu, un gandrīz tūlīt arī dienas garums sasniedz 12 h. Uz palodzes ievērojami uzlabosies gaismas apstākļi. ",
+      "Jānogaida līdz brīdim, kad dārzā augsni drīkst rušināt. Pēc sniega nokušanas augsne kādu laiku ir pārmitra, bet strauji žūst. Apstrādājot pārāk mitru augsni, veidojas kunkuļi. Ja īsto brīdi nokavē, smaga augsne pārvēršas par klonu, bet viegla - put. Labi, ja ir iespēja izmantot frēzi, ko var arī nomāt. Jāpārrok arī rudenī uzraktās dobes. ",
+      "Var likt diedzēt sēklai domātos kartupeļus. Kartupeļu diedzēšanas laikā uz bumbuļiem izveidojas īsi, drukni gaismas asni ar sakņu aizmetņiem pie asnu pamatnes. Sēklas bumbulis kļūst zaļgans. Reizē ar hlorofilu, kas veidojas gaismas ietekmē, kartupeļu bumbuļos rodas arī glikoalkaloīdi - indīgas vielas, kas nodrošina bumbuļu aizsardzību pret kaitēkļiem gluži kā kodne. ",
+      "Marta sākumā var iesēt dēstiem partenokarpu hibrīdu gurķus (piemēram, ‘Sherpa F1’, ‘Adam F1’, ‘Kybria F1’, ‘Dingent F1’, ‘Mirabella F1’, ‘SV409’ u.c.), miniatūras paprikas un tomātus, baklažānus un pepino. Nav ieteicams sēt tieši kastēs vai podos, vispirms jāizaudzē dēsti. ",
+      "Pelni ir lielisks mēslojums. Tos apkaisa ap augļu kokiem un krūmiem, uzber arī zālienam. Pelni noder arī kā pretslīdes līdzeklis pagalma celiņiem atkušņa laikā. ",
+      "Uz upeņu un jāņogu zariem dažkārt veidojas lieli, resni, apaļi pumpuri, kuri vēlāk neplaukst. Tie ir pumpuru ērces (Eriophyes ribis) bojājumi. Tie noteikti jāsavāc un jāiznīcina. Ja invadēto pumpuru ir daudz, tad jāizgriež un jāiznīcina visi inficētie zari. ",
+      "Marta beigās, kad dienas ir apmākušās, rozēm un citām ziemcietēm var nedaudz noņemt piesegumu. Bet martā vēl paturam augus piesegtus, jo gaisa temperatūra ir svārstīga un var pazemināties.",
+      "Laiks atbrīvot augus no liekā, ja pērnā gada laksti palikuši, piemēram, astilbēm, ehinācijām, čikstenēm un citiem augiem, tie ir jānogriež. Arī graudzāļu laksti ir lieki, tos noņem, kamēr nav sākuši augt pirmie asni. ",
+      "Pirmā grābšana. Kad nokusis sniegs un apžuvusi zeme, vajadzētu ar lapu grābekli nogrābt pagalma zālienu, tā aizvācot visus gružus, koku zariņus, lapas u.c.",
+    ]
   },
   {
     "monthId": 4,
-    "tips": ["Aprīlis 1", "Aprīlis 2", "Aprīlis 3", "Aprīlis 4"]
+    "tips": [
+      "Laistīšana ir svarīgākais dēstu kopšanas darbs. Tos nedrīkst ne pārlaistīt, ne kaltēt. Labāk ir laistīt katru reizi ar vāju kompleksā mēslojuma šķīdumu. Ērtāk ir izmantot šķidrus mēslojumus, izvēle ir plaša, un tie sevišķi daudz neatšķiras. Dēsti, kas paredzēti izstādīšanai atklātā laukā, 5-7 dienas pirms izstādīšanas jānorūda, pakāpeniski pieradinot pie lauka apstākļiem. Sākumā telpas pastiprināti vēdina, bet pēdējās 3-4 dienas dēstus pilnīgi novieto laukā, uz nakti piesedzot ar agrotīklu. Ja naktī sola salnas, dēsti uz nakti atkal jāpārvieto siltumnīcā. ",
+      "Lai gurķi, tomāti vai paprika augtu stāvus un negāztos, podiņos iesprauž koka mietiņus (var iegādāties veikalos) augu atbalstam. ",
+      "Pavasarī, gatavojot augsni sējai, ir vērts uz dažām dienām apsegt to ar caurspīdīgu polietilēna plēvi. Tas paātrinās augsnes iesilšanu, un sēklas straujāk sadīgs. ",
+      "Aprīļa pirmajās dienās, kad augsnes temperatūra pārsniedz 80C, var sēt burkānus (Daucus carota sativus), sakņu pētersīļus (Petroselinum crispum), dilles (Anethum gaveolens), citus zaļumus. Sēj 15-20 cm attālās rindās. Rindstarpas platumu dārzā nosaka kapļa platums. Sējas dziļums 2-3 cm. Lai sēklas uzdīgtu strauji un vienlaikus, ir svarīgi, lai tās iesētu vienādi dziļi un sēklas gultne būtu gluda un cieta. To var panākt, iespiežot kapļa vai grābekļa kātu iepriekš uzrušinātā augsnē. ",
+      "Var sēt zirņus (Pisum sativum) un dārza jeb cūku pupas (Vicia faba). Zirņus sēj 80-140 sēklas uz 1 m2 . Attālums starp rindām ir atkarīgs no šķirnes - zemos var sēt tuvāk, bet augstos tā, lai būtu viegli novākt ražu arī starp garajiem augiem. Vidēji zirņiem pietiek ar 25-45 cm lielu rindstarpu platumu. Atstatums starp sēklām rindā ap 10 cm. Sējas dziļums 4-5 cm. Cūku pupas sēj 6-10 cm dziļi. Svarīgi, lai visiem augiem pietiktu vietas un gaismas, tādēļ attālumam starp rindām jābūt 60-75 cm, bet starp augiem rindā 15-20 cm. Sēklu patēriņš 10-15 g uz m2.",
+      "Aprīlī ogulājiem vajadzīgs slāpekļa mēslojums. Var lietot komplekso pavasara mēslojumu vai iestrādāt apdobes kompostu - satrūdējušus kūtsmēslus."
+    ]
   },
   {
     "monthId": 5,
-    "tips": ["Maijs 1", "Maijs 2", "Maijs 3", "Maijs 4"]
+    "tips": [
+      "Vispiemērotākais laiks kartupeļu (Solanum tuberosum) stādīšanai ir no aprīļa beigām līdz maija vidum. Maija otrajā pusē katra novēlota stādīšanas diena atstāj ietekmi uz ražas lielumu. Tomēr vēl līdz Jāņiem iestādīti kartupeļi dos pieklājīgāku ražu. ",
+      "Mazdārziņos agros kartupeļus zemē drošāk likt ap 5.-15. maiju. Ja sēklas kartupeļus iznes no siltas telpas un tūlīt stāda augsnē, kas iesilusi tikai līdz 100C, dīgšanas periods ieilgst, tie var inficēties ar dīgstu puvi. ",
+      "Siltumnīcā izkar dzeltenos līmes vairogus baltblusiņu un citu lidojošu kaitēkļu ierobežošanai. Vairogi jāizkar augu galotņu līmenī un jāceļ augstāk, augiem augot. Tie regulāri ik pēc 3-4 nedēļām janomaina neatkarīgi no pielipušo kaitēkļu daudzuma. ",
+      "Visi augļu koki un ogulāju krūmi zied tieši maijā, tādēļ svarīgi parūpēties par apputeksnētājiem - bitēm, kamenēm un pat lapsenēm. To darbu nedrīkst traucēt, bet, ja nepieciešams lietot augu aizsardzības līdzekļus, smidzinājumus veic vakarā, kad kukaiņi devušies naktsmierā. ",
+      "Lai saldie ķirši (Prunus avium) ražotu, nedrīkst blakus stādīt divus vienas šķirnes kokus. Jābūt vismaz 2-3 dažādām vienā laikā ziedošām šķirnēm, piemēram, ‘Iputj’, ‘Meelika’, ‘Paula’. Jo vairāk šķirņu, jo koki būs ražīgāki. Gandrīz visas agrāk ziedošās saldo ķiršu šķirnes savstarpēji labi apputeksnējas, izņēmums ir ‘Polli rubini’, kas zied ļoti agri, kā arī vēlu ziedošās ‘Drogana dzeltenais’, ‘Balzams’. Ziemīgais, pašauglīgais saldais ķirsis ir šķirne ‘Lapins’ ar lieliem augļiem, bet tam ir slikta salcietība.",
+      "Vēl zied krokusi (Crocus spp.), zilsniedzītes (Scilla spp.) un citas pavasara sīpolpuķes. Augi jāmēslo ar slāpekli un kalciju saturošu minerālmēslojumu. Piemēram, ar kalcija nitrātu. Pavasarī ziedošās sīpolpuķes mēslo trīs reizes: pirmo reizi tad, kad virs zemes redzami augu asni, otro reizi, kad zied, un trešo reizi - pēc ziedēšanas, lai puķu sīpoli uzkrāj spēku ziedēšanai nākamajā pavasarī. ",
+    ]
   },
   {
     "monthId": 6,
-    "tips": ["Jūnijs 1", "Jūnijs 2", "Jūnijs 3", "Jūnijs 4"]
+    "tips": [
+      "Zemenes jālaista arī ražas laikā, tādējādi palielinot ražu. Laista uzmanīgi starp rindām, cenšoties nesamitrināt lapas. Ja laistīšanai izmanto zāliena laistītāju un nav iespējams pasargāt lapas no mitruma, labāk jālaista rīta pusē - liekais mitrums ātri apžūst un neveicina infekciju attīstību.  ",
+      "Jūnija sākumā uzmanība jāpievērš sīpolu, puravu un ķiploku aizsardzībai pret sīpolu mušu (Delia antiqua), burkānu aizsardzībai pret burkānu lapu blusiņu (Trioza viridula), kāpostu kultūrās - pret spradžiem (Phyllotreta spp.) un balteņu (Pieris brassicae) kāpuriem. Mazdārziņos to visvieglāk var izdarīt, apsedzot visas kultūras ar agrotīklu. ",
+      "Siltumnīcās regulāri jāveido augi, piešķirot tiem optimālu formu. To dara, pilnībā izņemot pazares (tomātiem) vai saīsinot par 2-3 lapām (gurķiem).",
+      "Tomātu ražu var palielināt par 10-15%, atbalstot pirmos smagākos ķekarus ar speciāliem ķekaru turētājiem, kuri novērš ķekara aizlūšanu. Turētāji jāieliek ziedķekara pamatnē, sākoties tā ziedēšanai, nevis tad, kad kāts kļuvis resns un jau aizlūzis. ",
+      "Ja vēlas pavairot vīnogulājus savā dārzā, visvienkāršāk ir pieliekt dzinumu un apraust ar zemi. Tas apsakņosies, un būs jauni stādiņi. Vēl interesants variants - vīnogulāja dzinumam apliek mitras sūnas vai augsni, apņem ar polietilēna maisiņu un apsien augšā un apakšā. Šajā vietā dzinums sāks veidot saknes. Kad sakņu kamols jau manāms, dzinumu nogriež - un stāds gatavs. ",
+      "Lai stādi balkona kastē vai dārzā puķpodā labi ieaugtos, svarīgi, lai substrāta mitrums būtu lielāks nekā sakņu kamolā. Kad augi ir iedzīvojušies, jāveic pirmā papildmēslošana, aplaistot ar kompleksā mēslojuma šķīdumu. Ērtāk ir lietot jau gatavus šķidros mēslojumus, tos grūtāk pārdozēt. Pirmo papildmēslošanu veic pirms ziedpumpuru atvēršanās un atkārto ik pēc nedēļas. ",
+    ]
   },
   {
     "monthId": 7,
-    "tips": ["Jūlijs 1", "Jūlijs 2", "Jūlijs 3", "Jūlijs 4"]
+    "tips": [
+      "Siltā un pietiekami mitrā laikā gurķiem (Cucumis sativus), kabačiem (Cucurbita pepa), patisoniem (C. pepa) un tomātiem (Solanum lycapersicum) augļi nogatavojas ļoti strauji, un nereti tie jāievāc katru dienu. Īsaugļu gurķi pēc siltajām naktīm bieži vien jānolasa divreiz dienā - no rīta un vakarā, lai tie nepāraugtu.  ",
+      "Līdz 20. jūlijam stāda ziedkāpostus. Kāpēc ziedkāposti augot izirst? Zema ziedkāpostu (Brassica oleracea subsp. botrytis) kvalitāte vasarā sarūgtina ne vienu vien audzētāju. Atbilde slēpjas šķirnes izvēlē un ziedkāpostiem nepieciešamās temperatūras nostiprināšanā. Lapu augšanai optimālā temperatūra ir 20-220C, bet galviņas ieriešas un aug 14-160C temperatūrā.  ",
+      "Ziemas ķiplokus novāc, kad nodzeltējuši 30% stublāja. Ja nokavē, ārējās sausās zvīņas pārplīst, daiviņas sadalās jau uz lauka un daļa paliek augsnē. ",
+      "Ja dobes atbrīvotas relatīvi agri - jūlija beigās vai augusta sākumā, bet otras ražas audzēšana nav ieplānota, var iesēt zaļmēslojumu, lai novērstu vēja eroziju un nezāļu augšanu. Sējai augustā derēs lapu sinepes (Sinapis alba), ziemas rapsis (Brassica napus) vai rudzi (Secale cereale).",
+      "Ravē un vago kartupeļus, pārbauda, vai uz lapām nav kaitēkļu. Vago ik pēc 7-14 dienām, līdz kartupeļu augi ir tik lieli, ka lapas starp vagām sakļaujas. Pastāv viedoklis, ka vagošanu var veikt arī vēlāk, ja pēc lietus veidojas augsnes garoza vai nepieciešams ierobežot nezāles. ",
+      "Kuras nezāles var likt kompostā? Ja kaudze ir neliela, plāna un paretam tiek papildināta ar jaunu kompostējamo materiālu devu, tajā droši var likt tikai viengadīgās nezāles. Daudzgadīgās, it sevišķi vārpatu (Agropyron repens), gārsu (Aegopodium podagraria), lielo nātri (Urtica dioica) un vībotni (Artemisia vulgaris) tādā kaudzē var likt tikai bez saknēm.  "
+    ]
   },
   {
     "monthId": 8,
-    "tips": ["Augusts 1", "Augusts 2", "Augusts 3", "Augusts 4"]
+    "tips": [
+      "Vēl var sēt dilles, redīsus un daikonus, salātus, spinātus, loku šķirņu sīpolus (‘Parade’, ‘White Lisbon’, ‘Savel’) novākšanai septembrī, mēneša vidū sēj skābenes nākamā gada ražai.  ",
+      "Kartupeļu laksti jānopļauj divas nedēļas pirms plānotās ražas novākšanas. Tas veicina bumbuļu nobriešanu un mazina kartupeļu bojāšanos novākšanas laikā. Latvijā tradicionāli kartupeļus rok septembra sākumā, kamēr laiks ir pietiekami silts.  ",
+      "Lai sīpoli straujāk nobriestu, ieteicams stādījumus pierullēt: ar grābekli aizlauzt lakstus, pieliecot pie zemes. Tad augiem lokos esošās barības vielas sāk pārvietoties uz sīpoliem, lapas ātrāk nokalst un sīpoliem veidojas sausas ārējās zvīņlapas. Kad 60-80% lakstu ir nokrituši, sāk dzeltēt un atmirst, ir piemērotākais laiks sīpolu novākšanai.  ",
+      "Gurķus un ķirbjus turpina apdraudēt neīstā miltrasa. Pie pirmajām slimības pazīmēm - gaiši dzelteni, stūraini plankumi uz lapām, lapas apakšpusē eļļaini - augus var spēcināt ar lapu mēslojumu CalMax. ",
+      "Krūmmellenes (Vaccinum corymbosum) nogatavojas pakāpeniski, agrīnās šķirnes augusta sākumā, vēlīnās pat septembrī. Lai ogas sasniegtu pilngatavību, vislabāko garšu un aromātu, jau zili iekrāsotām ogām jāļauj nogatavoties pie auga vēl 5-7 dienas. Vislabāk ir vākt kultūrmelleņu ražu vairakas reizes ar dažu dienu intervālu.  ",
+      "Pēc ražas novākšanas zemeņu dobes jāmēslo. Ziedpumpuru ieriešanās notiek īsas dienas apstākļos, proti, septembrī. Tad zemenes jānodrošina ar barības elementiem, sevišķi slāpekli. Lai augi labi sagatavotos ziemai, nepieciešami arī citi barības elementi. Vispirms augiem noņem vecās un slimību bojātas lapas un stīgas. Pēc tam izkaisa komplekso mēslojumu ar paaugstinātu slāpekļa saturu 50-60 g/m2 un ierušina to zemē. Izmantojot organiskos mēslošanas līdzekļus, devai attiecīgi jābūt augstākai. Ja zemeņu mēslošanai izmanto kompostu, deva var būt 3-5 l/m2 ."
+    ]
   },
   {
     "monthId": 9,
-    "tips": ["Septembris 1", "Septembris 2", "Septembris 3", "Septembris 4"]
+    "tips": [
+      "Lauka gurķi (Cucumis sativus), ja tie vēl nedaudz ražo, jāapsedz ar agrotīklu. Septembrī to noņem tikai ražas vākšanas brīdī. ",
+      "Galviņkāpostus (Brassica oleracea) mēneša beigās vāc skābēšanai. Skābējamām šķirnēm ir raksturīgs augsts cukuru saturs - ja novākšanu novilcina, tas bieži veicina pelēkās puves izplatīšanos. Arī kārtīgi notīrītajās galviņās var saglabāties infekcija, vēlāk tā traucēs skābēšanas procesu. ",
+      "Galda bietes (Beta vulgaris) noteikti jānovāc pirms sala, citādi tās slikti glabāsies. Arī pāraugušas bietes slikti glabājas, nereti iekšpusē veidojas tukšumi.",
+      "Mēneša beigās jāvāc sakņu selerijas (Apium graveolens). Tām, tāpat kā bietēm, nogriež lapas un saīsina sānsaknes.",
+      "Septembrī neapkurināmajās plēves siltumnīcās tomāti vēl aug. Galvenais darbs - turpinat pelēkās puves ierobežošanu un tomātu regulāru mēslošanu ar kālija mēslojumiem (labāk ar kālija hlorīdu, jo hlors palīdz tomātiem cīnīties ar pelēko puvi). ",
+      "Gatavojot zemi ķiploku (Allium sativum) stādīšanai, divas nedēļas iepriekš augsnē 10 cm virskārtā iestrādā mēslojumu Perlka 30-40 g/m2 . Pirms stādīšanas papildus iestrādā trihodermīnu vai citu mikrobioloģisko līdzekli.",
+      "Lai saglabātu izaugušās ražas kvalitāti, novākšanas laikā maksimāli jāizvairās no kartupeļu traumēšanas. Bumbulim nepatīkami ir ne tikai mehāniski iešķēlumi, bet arī sasitumi. Ar laiku sasitumu vietās audi zem mizas kļūst tumši, bojātās vietas vieglāk pakļaujas slimību patogēniem.",
+      "Kokos nedrīkst atstāt slimību un kaitēkļu bojātus augļus. Tie jānolasa atsevišķā vākšanas reizē un jāiznīcina. Drošākais utilizēšanas veids ir kompostēšana kopā ar citām augu atliekām, pievienojot biokompostētāju. ",
+      "Apgriež parastā ceriņa (Syringa vulgaris) stādījumus, kas izstiepušies 4-5 m gari. To sauc par atjaunojošo apgriešanu, kas piemērota nekoptiem aizaugušiem krūmiem. Stumbrus apzāģē 1-1,5 m augstumā. Tad attīstās snaudošie pumpuri un veidojas ūdenszari, kas nākamajā gadā būs jāparetina. Iespējams, vajadzēs gaidīt 2-3 gadus, līdz atjaunotie ceriņi atsāks ziedēt.",
+    ]
   },
   {
     "monthId": 10,
     "tips": [
-      'Oktobris 1, \n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
-      "Oktobris 2",
-      "Oktobris 3",
-      "Oktobris 4"
+      'Ķiplokus (Allium sativum) stāda oktobra otrajā pusē 70 cm attālās rindās 5-8 cm dziļi, daiviņas izvietojot 10 cm attālumā citu no citas. Ķiploku galviņas sadala daiviņās neilgi pirms stādīšanas. Atkarībā no izmēra optimālais skaits ir 25-40 daiviņas kvadrātmetrā. Mazdārziņos ķiplokus parasti stāda rindā 10-15 cm attālumā citu no cita 7-10 cm dziļi (3-5 cm ir par seklu), lai stādījums neciestu kailsalā.',
+      "Kad rabarberiem (Rheum rhabarbarum) atmirst lapas, pirms sala augus bagātīgi piesedz ar satrūdējušu kūtsmēslu vai melnzemes mulču. Tas pasargā no kailsala, ka arī ielabo zemi. Labs mulčas materiāls ir arī nopļauta zāle un koku lapas. Rabarberiem nav kopīgu slimību ar kokiem, tādēļ no infekcijas uzkrāšanās nav jābaidās. ",
+      "Tomātus (Solanum lycopersicum) un papriku (Capsicum annuum) bieži nākas novākt vēl pazaļus, jo nepietiekamā siltuma dēļ tie vairs nespēj nogatavoties uz augiem. Vācot pēdējo tomātu un paprikas ražu, augļi rūpīgi jāšķiro, izmetot visus kaut nedaudz puves skartos. Nogatavināšanai ir vērts atstāt tikai pilnīgi izaugušus, kaitēkļu un slimību neskartus augļus. Vislabāk tos salikt nelielās koka vai plastmasas kastēs un novietot telpā 18-220C temperatūrā, lai straujāk iekrāsojas. ",
+      "Ja gadījies, ka dārzā izzied salāti vai rukola, vai kāds cits viengadīgs garšaugs, to ziedkopas iekar siltumnīcā, lai izbirst sēklas: pavasarī tās sadīgs labāk par pirktajām.",
+      "Pārrok kompostu. Svaigāko zaļaugu masu klāj apakšā un pa kārtai uzber melnzemi. ",
+      "Sakārto dārza laistīšanas sistēmu. Izlaiž ūdeni, ieziemo (nereti noņem) dārza krānu. Satin un pakar šļūtenes. ",
+      "Nokaltušos augus var sadedzināt, bet parasti tie ir vēl pārāk sulīgi un lāgā nedeg. Atliek sagriezt ar dārza šķērēm ap 30-40 cm garos posmos un likt kompostā. ",
     ]
   },
   {
     "monthId": 11,
-    "tips": ["Novembris 1", "Novembris 2", "Novembris 3", "Novembris 4"]
+    "tips": [
+      "Visneaizsargātākie ziemā ir rudenī iegādātie un neiestādītie stādiņi. Tos pierok, lai saknes būtu zem zemes, un apsedz ar egļu zariem, lai neapgrauž peles.",
+      "Problemātiskie ziemotāji ir kauleņkoki (persiki, aprikozes, ķirši) un visi pirmā gada kociņi. Tos noteikti kaļķo un izveido segu stumbram. Lai aptītu ar skujām, salmiem, džutas maisiem un citu materiālu, jau laikus blakus kokiem iedzen mietiņus, pie kuriem stiprināt siltinājumu. Mazos kociņus pirmos 2-3 dzīves gadus noteikti vajag balsināt, tādēļ izvēlas segumu, ko katru gadu var noņemt. ",
+      "Sakņu zonā uzber mulču jaunajiem kociņiem un tiem, kas jutīgi pret salu, piemēram, pundura, ģimenes ābelēm un kolonnābelēm. To sakņu sistēma ir maza un sekla. Sakņu kamols parasti ir aptuveni tikpat liels kā vainags. Glīti izskatās, ja kokam veido apdobi. Jaunajiem kociņiem tas ir sevišķi nepieciešams. ",
+      "Vēlā rudenī, kad dārzā augsne sasalusi, persiki (Prunus persica) jāpiesedz un janoēno ar skujām vai agrotīklu. Audzējot siltumnīcā, persiki ziemo bez papildu pieseguma, tikai jāraugās, lai augsne pārāk neizžūtu. Ziemā vēlams ap stumbru uzmest sniegu - tas veido teicamu aizsargslāni pret salu.",
+      "Kailajos kokos labi redzamas mūmijas - puvušie augļi. Tie nākamgad kļūs par slimību perēkļiem, tādēļ augļus notrauš un iznīcina. ",
+      "Ogu krūmiem var izgriezt vecos zarus.",
+      "Ja augsne ir ļoti sausa, kultūrmellenes (Vaccinuum corymbosum) bagatīgi aplaista. Šiem augiem ir sevišķi smalka un jutīga sakņu sistēma. Mulčē ar skābo kūdru, jo, vasarā laistot, augsne nereti ir noskalojusies no saknēm. ",
+      "Kamēr zeme nav sasalusi, var stādīt tulpes un citas pavasarī ziedošās sīpolpuķes.",
+      "Rudenī ir īstais laiks balsināt koku stumbrus. Rudens lietū daļa balsinājuma noskalosies, bet tas nekas: nepieciešamais daudzums tomēr paliks. Galvenais, lai koka stumbrs kļūst gaišāks, to mazāk karsē saule un lai neplaisā miza. Tas sevišķi svarīgi kauleņkokiem, tādēļ tos vajadzētu kaļķot pirmām kārtām. Balsinājums kalpo gan saules apdegumu, gan slimību profilaksei. Balsinot miza kļūst gluda un nokrīt ķērpji. Koka vainagu var kaļķot ar pulverizatoru. "
+    ]
   },
   {
     "monthId": 12,
-    "tips": ["Decembris 1", "Decembris 2", "Decembris 3", "Decembris 4"]
+    "tips": [
+      "Jaunajiem augļu kociņiem ap stumbriem var aplikt skujas vai agrotīklu gan pret grauzējiem, gan arī - lai neplaisā stumbru miza. ",
+      "Ja rožkāpostus (Brassica oleracea var. gemmifera) vāc tagad, labāk ir nocirst visu augu. Neapdarinātus stublājus (bez lapām, bet lielākā to daļa ap šo laiku parasti nobirst) var uzglabāt pat ilgāk. Galviņas atdala no stublāja tieši pirms izmantošanas. Šo darbu labāk veikt rupja auduma cimdos. ",
+      "Decembrī daudz rūpju sagādā dārzeņu uzglabāšana stirpās. Krasi mainoties gaisa temperatūrai, jāpaspēj laikus palielināt seguma kārtu un aizvērt vēdlūkas. Katrā stirpā vēlams ievietot termometru, lai īstajā brīdī pagūtu atvērt gaisa ejas un nepieļautu dārzeņu pārkaršanu. ",
+      "Jāseko līdzi produktu glabāšanas apstākļiem pagrabā. Ja sinoptiķi sola salu, laikus jāaiztaisa ventilācijas lūkas. Atkušņa laikā tās atkal jāver vaļā, lai pazeminātu gaisa temperatūru un gaisa mitrumu pagrabā.",
+      "Pēc intensīvas snigšanas no siltumnīcas jumta jānotīra sniegs, lai nepieļautu konstrukcijas sabrukšanu. Sniegs regulāri jānovāc arī gar siltumnīcas sienām, lai tās nesabojātu kupenas svars. ",
+      "Ziemas laiks jāizmanto sevis izglītošanai, lasot dārzkopības žurnālus un grāmatas. Vērts iepazīties ar selekcijas firmu jaunākajiem piedāvājumiem internetā, kā arī apmeklējot lekcijas un seminārus, ko rīko dārzkopības entuziastu klubs Tomāts, Latvijas Lauku konsultāciju un izglītības centrs, pašvaldības, dārzkopības preču tirgotāji un citi.  ",
+      "Jāizvērtē aizvadītās sezonas rezultāti. Kura šķirne patika un kura ne? Laikus jāizlemj, kuru šķirņu dēstus audzēs paši, bet kurus pasūtīs pie profesionāliem audzētājiem vai pirks tirdziņos. Daudzi stādu un dēstu audzētāji ir pieejami sociālajos tīklos, un tiem laikus jāpasūta vēlamās šķirnes. ",
+      "Dārzā jāierīko putnu barotavas. Piebarošana ir sevišķi nepieciešama aukstā, sniegotā laikā, kad putni nespēj atrast barību. Barotavas veicina bioloģisko daudzveidību un rosina bērnu interesi par dabu un tās aizsardzību. Putnu piebarošanai der dažādu augu sēklas, zīlītēm, zilzīlītēm un vēl dažiem putniem - arī nesālīts speķis. Jāatceras barotavas papildināt, jo putni pierod pie savām barošanas vietām. Ja cienasts būs vienmēr, putni iedzīvosies un pavasarī tuvumā meklēs ligzdu vietas.  "
+    ]
   },
 ];
 
@@ -3525,4 +3629,25 @@ var internetSourcesList = [
   ["Wtez", "www.tezaurs.lv"],
   ["Wtilde", "https://term.tilde.com/"],
   ["Wuzd", "www.uzdevumi.lv"],
+];
+var publicationsList = [
+  {
+    "text":
+        "Sviķe, S., 2018. A New Dictionary of Botanical Terms: Data Analysis of a Lexicographic Survey. Economics World. New York: David Publishing Company Journal. May-June 2018, 6 (3). 228–241.",
+    "links": [
+      "http://www.davidpublisher.com/index.php/Home/Article/index?id=35063.html"
+    ]
+  },
+  {
+    "text":
+        "Sviķe, S., 2017. A New Dictionary of Botanical Terms: an Insight into the Compilation Project of the Dictionary. Jeļena Titko (ed) Emerging Trends in Economics, Culture and Humanities (etECH2017). Conference Proceedings. Rīga: Ekonomikas un kultūras augstskola, 22–30.",
+    "links": ["https://www.augstskola.lv/upload/Conf_proceedings_2017.pdf"]
+  },
+  {
+    "text":
+        "Stalažs, A., 2015. Asteru, miķelīšu, ziemasteru un dažu citu radniecīgo ģinšu sugu latviskie nosaukumi. Scripta Letonica 2(1). Dobele: RPD Science. 24–30.",
+    "links": [
+      "http://www.rpd-science.org/ScrLet/V002/Scripta_Letonica_2-1_2015_Art_4.pdf"
+    ]
+  }
 ];
